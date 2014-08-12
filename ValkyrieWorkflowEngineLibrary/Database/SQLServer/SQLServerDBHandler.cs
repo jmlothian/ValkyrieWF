@@ -67,7 +67,7 @@ namespace ValkyrieWorkflowEngineLibrary.Database.SQLServer
 			return LoadingData;
 		}
 
-		public List<ValkWFStep> LoadChildSteps(ref ValkWFStep CurrentStep)
+		public List<ValkWFStep> LoadChildSteps(ValkWFStep CurrentStep)
 		{
 			List<ValkWFStep> Children = new List<ValkWFStep>();
 			DataTable dt = SQLConnHandler.ExecuteDataTableSP("LoadChildSteps",
