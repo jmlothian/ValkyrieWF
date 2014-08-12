@@ -134,6 +134,9 @@
   <ItemGroup>
     <Content Include="ControlFlow.txt" />
     <Content Include="Database\SQLServer\DatabaseCreateScript.sql" />
+    <None Include="libzmq.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
