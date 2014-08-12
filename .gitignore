@@ -1,2 +1,5 @@
 *.suo
 App.config
+/packages
+bin
+obj
