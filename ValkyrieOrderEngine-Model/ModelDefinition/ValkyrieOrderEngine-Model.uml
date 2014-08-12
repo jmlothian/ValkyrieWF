@@ -1,0 +1,4344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
+  dslVersion="1.0.0.0"
+  Id="74a45393-7ebc-4f25-becd-2c312735235f"
+  name="ValkyrieOrderEngine-Model" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="695cd1f1-ec0b-4197-862c-aa6dc32d64d6">
+      <body>This is any one of several processor nodes that can be coded and configured differently</body>
+      <annotatedElements>
+        <componentMoniker
+          Id="a02930a2-2ad7-4831-903c-51f677339c33"
+          LastKnownName="ValkyrieProcessor"
+          LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="acecc5a3-b426-4bfa-a3cd-9ee51e0aa0be">
+      <body>ValkyrieProcessor setup specifically to call and handle LinuxURL scripts</body>
+      <annotatedElements>
+        <componentMoniker
+          Id="f1229aaa-5551-4d66-9dba-1c6a663e218f"
+          LastKnownName="LinuxURLCaller"
+          LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="c8824d06-3770-4920-9d89-7ef74626b0f9">
+      <body>Message Queue containing commands for processor nodes.
+
+These are used to start/pause/stop processor nodes from a central location.</body>
+      <annotatedElements>
+        <componentMoniker
+          Id="9e5fe311-620e-4cd7-a6d9-4e83e402772a"
+          LastKnownName="ControlMessageQueue"
+          LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="c5adaf37-9cbf-437f-996a-cc0cfa738249">
+      <body>Contains messages specific to the linux url caller</body>
+      <annotatedElements>
+        <componentMoniker
+          Id="eb1579ae-2c38-4bf0-9d12-416ae060bffa"
+          LastKnownName="LinuxScript Message Queue"
+          LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="e205b9d2-b0d1-470a-82bc-fd63bad9c838">
+      <body>Temporary ValkyrieProcessor to aid transition of old style scripts to new system</body>
+      <annotatedElements>
+        <componentMoniker
+          Id="bac7a3d8-e137-4d53-ab5c-76e21a066f9e"
+          LastKnownName="OEEngine-ScriptRunner"
+          LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="2f4933e6-460c-4cd6-8c04-9b6a45f3ee97">
+      <body>Exec or web service that allows scripts to send messages to message queues</body>
+      <annotatedElements>
+        <componentMoniker
+          Id="d3265a1b-d535-4ac7-80e2-905c78de64b5"
+          LastKnownName="Script2Message Interface Exec"
+          LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="6b65600f-2513-4856-8f6d-b6b2a12918dc">
+      <body>Message Queue specific to handling old-style script calls</body>
+      <annotatedElements>
+        <componentMoniker
+          Id="3a09f770-8300-4ae1-b28c-29052e530156"
+          LastKnownName="ScriptCaller Message Queue"
+          LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="bc54b5f2-d03e-4618-8c60-ae3db7a57e77">
+      <body>Queue that keeps track of what new steps need processing.  
+
+In reality, there would be multiple queues, each with a specialized set of scripts/processors associated with it.  This allows shorter scripts executions to be seperated from longer ones to assist load balancing.</body>
+      <annotatedElements>
+        <componentMoniker
+          Id="af7cd85c-0ed5-4abf-9153-f56a4d1ec917"
+          LastKnownName="Valkyrie ToProcess Message Queue"
+          LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="ddb7edeb-f98e-4a42-bb2c-e4d2b4c57c66">
+      <body>Note for future:
+We could send the servername / database withing the message system, so that we could actually have multiple OE databases distributed to handle a much larger scale of processing</body>
+      <annotatedElements>
+        <componentMoniker
+          Id="29c5381f-5efb-44dd-9c5d-e6b7c0a898a3"
+          LastKnownName="OEDatabase"
+          LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <component
+        Id="a02930a2-2ad7-4831-903c-51f677339c33"
+        name="ValkyrieProcessor"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <requiredInterface
+            Id="626a502d-1065-4acc-9170-fc67c02cd32f"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="bfb3a0ba-db9d-4f51-8b22-9e168eaefcc8">
+                <providedInterfaceMoniker
+                  Id="2f1d7a64-c6b8-4b47-820d-61a60a050815"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="99934a2e-0b73-4dc5-b72b-e3808bebb67e"
+                LastKnownName="Reads From"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="0a94b8be-e5a7-458d-981d-31e18f96233b"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="0b84a799-f0b7-48b1-a84a-21528ab87e78">
+                <providedInterfaceMoniker
+                  Id="3434f4da-d6dc-491b-b803-ea0619ab7c89"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="7b400a07-0b29-411f-9fb1-04e63ba097a0"
+                LastKnownName="Read/Write"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="f1229aaa-5551-4d66-9dba-1c6a663e218f"
+        name="LinuxURLCaller"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="deb5541c-3ec4-42a7-8eab-77f0bd5e1d9a"
+            isSubstitutable="false">
+            <componentMoniker
+              Id="a02930a2-2ad7-4831-903c-51f677339c33"
+              LastKnownName="ValkyrieProcessor"
+              LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <requiredInterface
+            Id="0845df94-e47b-4a76-b78d-c87853fd4c1e"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="c770f96e-c6b2-4184-84d8-5801a923b67f">
+                <providedInterfaceMoniker
+                  Id="97608b37-c53c-45a1-9b04-51d4b07ed35b"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="f6591c7d-f3e4-4e6b-956c-1041679462c1"
+                LastKnownName="ReadsFrom"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="9e5fe311-620e-4cd7-a6d9-4e83e402772a"
+        name="ControlMessageQueue"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="2f1d7a64-c6b8-4b47-820d-61a60a050815"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="29749048-3a91-415d-b8e3-1cd572832a7c"
+                LastKnownName="MessageQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="6cc60a68-dff9-4e24-9197-2fc18b38141a"
+        name="ValkyrieController"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <requiredInterface
+            Id="950b5ec6-c86e-44f4-8a70-939388fc01dd"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="7b23d16b-d60d-4320-846e-51ce6174c6c9">
+                <providedInterfaceMoniker
+                  Id="2f1d7a64-c6b8-4b47-820d-61a60a050815"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="b89b6606-a32f-48b7-b084-4997f751d47e"
+                LastKnownName="Writes To"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="af0bcf24-68de-476b-8289-4c795adbf6e7"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="1f5d127a-5b56-47ec-9dbe-5f56f5f9e499">
+                <providedInterfaceMoniker
+                  Id="3434f4da-d6dc-491b-b803-ea0619ab7c89"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="0b0a13b9-cea0-4d88-bba6-9429e280521b"
+                LastKnownName="Read/Write"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="29749048-3a91-415d-b8e3-1cd572832a7c"
+        name="MessageQueue"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="b89b6606-a32f-48b7-b084-4997f751d47e"
+        name="Writes To"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="99934a2e-0b73-4dc5-b72b-e3808bebb67e"
+        name="Reads From"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="1a81863e-2390-4295-8d65-af47610e8580"
+        name="Reads From"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="eb1579ae-2c38-4bf0-9d12-416ae060bffa"
+        name="LinuxScript Message Queue"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="97608b37-c53c-45a1-9b04-51d4b07ed35b"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="9a053ab6-4f55-4ac6-9e1d-7145123366e4"
+                LastKnownName="MessageQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="9a053ab6-4f55-4ac6-9e1d-7145123366e4"
+        name="MessageQueue"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="f6591c7d-f3e4-4e6b-956c-1041679462c1"
+        name="ReadsFrom"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="bac7a3d8-e137-4d53-ab5c-76e21a066f9e"
+        name="OEEngine-ScriptRunner"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="55e89315-01bc-451b-be11-e01239ae39ab"
+            isSubstitutable="false">
+            <componentMoniker
+              Id="a02930a2-2ad7-4831-903c-51f677339c33"
+              LastKnownName="ValkyrieProcessor"
+              LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <requiredInterface
+            Id="06686abb-7798-43a3-b077-4bc25ee3b06d"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="95daa0b0-f9c9-45b2-a016-a3367cd0df44">
+                <providedInterfaceMoniker
+                  Id="55d619ba-7be2-4951-b7a0-50f1e972f865"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="33c1a748-bd71-4db5-b31c-33127b5c3283"
+                LastKnownName="Reads"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="17889072-f902-4ad8-b538-22ad2687a1b0"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="d5d8fb89-bebe-4685-8e00-127dd8f61325">
+                <providedInterfaceMoniker
+                  Id="a38e7563-b978-427a-a637-c0ca5fd13a2f"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="624b1ed0-d0ea-4617-bc5e-60a577802824"
+                LastKnownName="Call Script"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="b94175cd-0be2-48ae-b3e4-8053b337cabb"
+        name="Old-Style Scripts"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="a38e7563-b978-427a-a637-c0ca5fd13a2f"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="b7e8c712-3001-4d86-aed7-5dfd48b8e066"
+                LastKnownName="Exec"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface
+            Id="820f0db6-d48c-49fe-a813-2c0ac7500ad2"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="49fb9b5f-d109-490a-8349-00f2ad2d7fdb">
+                <providedInterfaceMoniker
+                  Id="d6b59017-c721-401a-bc2c-c37976a2a51d"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="f015540a-269b-4b39-8eac-40fa0b6edfaa"
+                LastKnownName="Calls"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="3a09f770-8300-4ae1-b28c-29052e530156"
+        name="ScriptCaller Message Queue"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="55d619ba-7be2-4951-b7a0-50f1e972f865"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="56feab72-40b6-4b40-9120-908d147b9196"
+                LastKnownName="MessageQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="d3265a1b-d535-4ac7-80e2-905c78de64b5"
+        name="Script2Message Interface Exec"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="d6b59017-c721-401a-bc2c-c37976a2a51d"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="b329e042-ef4d-447a-87e6-7299f3ae5993"
+                LastKnownName="Exec"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface
+            Id="246aa9ef-75f2-44fc-90f7-dc34a632b463"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="6024f2ee-46ce-421e-bd3a-c70965c4c3dd">
+                <providedInterfaceMoniker
+                  Id="55d619ba-7be2-4951-b7a0-50f1e972f865"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="6bbc8cc7-8449-41df-b039-a929ac31ae60"
+                LastKnownName="Writes"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="56feab72-40b6-4b40-9120-908d147b9196"
+        name="MessageQueue"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="33c1a748-bd71-4db5-b31c-33127b5c3283"
+        name="Reads"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="b7e8c712-3001-4d86-aed7-5dfd48b8e066"
+        name="Exec"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="624b1ed0-d0ea-4617-bc5e-60a577802824"
+        name="Call Script"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="b329e042-ef4d-447a-87e6-7299f3ae5993"
+        name="Exec"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="f015540a-269b-4b39-8eac-40fa0b6edfaa"
+        name="Calls"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="6bbc8cc7-8449-41df-b039-a929ac31ae60"
+        name="Writes"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="cd1993f1-0bca-452f-8e88-a92591834977"
+        name="Sequence1"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <ownedCommentsInternal>
+          <comment
+            Id="389c20f0-c3af-4b0e-8771-eb160f23a76b">
+            <body>Gets new OE Type steps set to active, limit this to (n) at a time.  Polling it done periodically when not processing steps</body>
+            <annotatedElements>
+              <behaviorExecutionSpecificationMoniker
+                Id="4d0439ad-7523-476b-b590-78972a907d41"
+                LastKnownName="BehaviorExecutionSpecification1"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </annotatedElements>
+          </comment>
+          <comment
+            Id="897fa4b6-46e8-470f-8835-f82f1bdf29ef">
+            <body>These are steps ONLY created by the completion of the step that was just updated</body>
+            <annotatedElements>
+              <behaviorExecutionSpecificationMoniker
+                Id="c62b2be2-6308-4350-95b4-0c33f8aaaf1b"
+                LastKnownName="BehaviorExecutionSpecification14"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </annotatedElements>
+          </comment>
+          <comment
+            Id="3eb5c02e-767b-4d1f-8ee6-98b9c8ad5806">
+            <body>The "get steps" and "insert / get next" calls are special to calling old style scripts.  In newer scripts, these should be handled internally by a processor nodes</body>
+          </comment>
+          <comment
+            Id="8fb40a16-9302-48fc-83c8-856a7206120b">
+            <body>This is done only for new-style script steps.  By putting messages in the ToProcess queue, nothing needs to poll the database to find these automated steps</body>
+            <annotatedElements>
+              <behaviorExecutionSpecificationMoniker
+                Id="fb594dc9-1e80-4f76-bb63-2c2a358cf1e6"
+                LastKnownName="BehaviorExecutionSpecification16"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </annotatedElements>
+          </comment>
+        </ownedCommentsInternal>
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="4d0439ad-7523-476b-b590-78972a907d41"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="e0d3eb9c-b9b1-49ea-9b48-c57134b5dffa"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="963ce6b3-62cc-4ccc-8ccc-8e27d4e87654"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="451a1bc9-4617-49c4-87eb-03f201786aec"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="a30e6071-9203-4b09-83a4-0dcff5614281"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="963ce6b3-62cc-4ccc-8ccc-8e27d4e87654"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="8848e66b-e1b2-4963-8253-fe8db5b16395"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="451a1bc9-4617-49c4-87eb-03f201786aec"
+            name="MessageOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0eb297ec-b244-4cc6-a2c2-9ad2e79c462f"
+            name="MessageOccurrenceSpecification1">
+            <covered>
+              <lifelineMoniker
+                Id="34adb443-296f-4fb3-a54f-ed29cdde187c"
+                LastKnownName="oEEngine-ScriptRunner : OEEngine-ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="efd49c66-22f7-44a2-8180-931844e11106"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="34adb443-296f-4fb3-a54f-ed29cdde187c"
+                LastKnownName="oEEngine-ScriptRunner : OEEngine-ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="a30e6071-9203-4b09-83a4-0dcff5614281"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="e0d3eb9c-b9b1-49ea-9b48-c57134b5dffa"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="2f89c6ce-b8a8-43c5-a202-291a6a3c49a7"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="f65b52aa-5b91-4691-af0a-42ad2f39cb0f"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="9b60ecc6-c4ba-421d-85f9-e6c660c7f9c1"
+                LastKnownName="scriptCaller Message Queue : ScriptCaller Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="7b35fa1c-c954-4843-88f6-9ca4e52a7525"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="8bd53686-836f-4cee-bb0b-65c581b0fd6f"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="ad24d30a-ff1f-4755-a0bd-5d9884692354"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="8bd53686-836f-4cee-bb0b-65c581b0fd6f"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="dab735d8-0ec6-4725-81b0-c28a788b1107"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9b60ecc6-c4ba-421d-85f9-e6c660c7f9c1"
+                LastKnownName="scriptCaller Message Queue : ScriptCaller Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="22e23b84-d220-4d2a-8aac-13be35a680bf"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="34adb443-296f-4fb3-a54f-ed29cdde187c"
+                LastKnownName="oEEngine-ScriptRunner : OEEngine-ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="ad24d30a-ff1f-4755-a0bd-5d9884692354"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="9b60ecc6-c4ba-421d-85f9-e6c660c7f9c1"
+                LastKnownName="scriptCaller Message Queue : ScriptCaller Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="7b35fa1c-c954-4843-88f6-9ca4e52a7525"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="eb846687-5ae7-4985-9486-cfdb8b74c695"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9b60ecc6-c4ba-421d-85f9-e6c660c7f9c1"
+                LastKnownName="scriptCaller Message Queue : ScriptCaller Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="3dd62b07-4752-4277-8e83-5a28c732329f"
+            name="BehaviorExecutionSpecification4">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="9b60ecc6-c4ba-421d-85f9-e6c660c7f9c1"
+                LastKnownName="scriptCaller Message Queue : ScriptCaller Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="9b9c040a-4177-4235-82b8-ffa7367d7023"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="dfc6bf35-0e4a-47bf-a415-52c5e4c51593"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="d474bbbf-5c86-4ccd-83aa-6d72671269c3"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="4c3fce92-7a22-4a81-9ccf-c620d8d6c948"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="dfc6bf35-0e4a-47bf-a415-52c5e4c51593"
+            name="ExecutionOccurrenceSpecification7">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="d6ab8911-8a4f-49c3-9389-f9aca3e20926"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9b60ecc6-c4ba-421d-85f9-e6c660c7f9c1"
+                LastKnownName="scriptCaller Message Queue : ScriptCaller Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="283249e9-6d16-49af-8277-cae8c30ae684"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="34adb443-296f-4fb3-a54f-ed29cdde187c"
+                LastKnownName="oEEngine-ScriptRunner : OEEngine-ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="d474bbbf-5c86-4ccd-83aa-6d72671269c3"
+            name="MessageOccurrenceSpecification10">
+            <covered>
+              <lifelineMoniker
+                Id="9b60ecc6-c4ba-421d-85f9-e6c660c7f9c1"
+                LastKnownName="scriptCaller Message Queue : ScriptCaller Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="8ad421cc-ad42-4ca9-98c7-5e2c6ca7da85"
+            name="MessageOccurrenceSpecification12">
+            <covered>
+              <lifelineMoniker
+                Id="34adb443-296f-4fb3-a54f-ed29cdde187c"
+                LastKnownName="oEEngine-ScriptRunner : OEEngine-ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="4c3fce92-7a22-4a81-9ccf-c620d8d6c948"
+            name="MessageOccurrenceSpecification11">
+            <covered>
+              <lifelineMoniker
+                Id="9b60ecc6-c4ba-421d-85f9-e6c660c7f9c1"
+                LastKnownName="scriptCaller Message Queue : ScriptCaller Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="9b9c040a-4177-4235-82b8-ffa7367d7023"
+            name="ExecutionOccurrenceSpecification8">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="cf3d90b6-7ea9-469f-a714-f29eef36d3fd"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9b60ecc6-c4ba-421d-85f9-e6c660c7f9c1"
+                LastKnownName="scriptCaller Message Queue : ScriptCaller Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="a78e9507-2044-4cf7-8f1f-6ef279fc04e9"
+            name="BehaviorExecutionSpecification5">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="c50f4a78-29be-48c8-ab50-a53f5e80e9a2"
+                LastKnownName="old-Style Scripts : Old-Style Scripts"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="0dd89e8f-e326-4c77-abdf-0f2683c1f437"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="f754d49b-84bc-4d41-a746-b8c1077dd772"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="6fab4cde-a18b-498a-95f4-f8f85399ca91"
+                LastKnownName="MessageOccurrenceSpecification14"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="5ca71e4e-0ab3-42f1-841f-89e9413e7df5"
+                LastKnownName="MessageOccurrenceSpecification15"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="429651c3-9f86-4251-9fbb-0f3116ac5910"
+                LastKnownName="ExecutionOccurrenceSpecification11"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="1ef0b142-e072-44b0-b5bd-e6b2416caef8"
+                LastKnownName="ExecutionOccurrenceSpecification12"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="6adb6ea1-cd31-4551-a669-28f645f9fd00"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="f754d49b-84bc-4d41-a746-b8c1077dd772"
+            name="ExecutionOccurrenceSpecification9">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="85ee49f8-c8d2-4ae7-ba3d-abd7237ea92e"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c50f4a78-29be-48c8-ab50-a53f5e80e9a2"
+                LastKnownName="old-Style Scripts : Old-Style Scripts"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6fab4cde-a18b-498a-95f4-f8f85399ca91"
+            name="MessageOccurrenceSpecification14">
+            <covered>
+              <lifelineMoniker
+                Id="c50f4a78-29be-48c8-ab50-a53f5e80e9a2"
+                LastKnownName="old-Style Scripts : Old-Style Scripts"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="8b590d16-434e-4253-ada0-b4e6db05abff"
+            name="MessageOccurrenceSpecification13">
+            <covered>
+              <lifelineMoniker
+                Id="34adb443-296f-4fb3-a54f-ed29cdde187c"
+                LastKnownName="oEEngine-ScriptRunner : OEEngine-ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="5ca71e4e-0ab3-42f1-841f-89e9413e7df5"
+            name="MessageOccurrenceSpecification15">
+            <covered>
+              <lifelineMoniker
+                Id="c50f4a78-29be-48c8-ab50-a53f5e80e9a2"
+                LastKnownName="old-Style Scripts : Old-Style Scripts"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="e7facc77-ceee-43bc-8d62-a8b86c496c66"
+            name="BehaviorExecutionSpecification6">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="c50f4a78-29be-48c8-ab50-a53f5e80e9a2"
+                LastKnownName="old-Style Scripts : Old-Style Scripts"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="1ef0b142-e072-44b0-b5bd-e6b2416caef8"
+                LastKnownName="ExecutionOccurrenceSpecification12"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="429651c3-9f86-4251-9fbb-0f3116ac5910"
+                LastKnownName="ExecutionOccurrenceSpecification11"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="80bbee5b-f823-4338-89c8-3544405a7a4b"
+                LastKnownName="MessageOccurrenceSpecification16"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="429651c3-9f86-4251-9fbb-0f3116ac5910"
+            name="ExecutionOccurrenceSpecification11">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="139fb66d-3cbf-4ecc-8476-0f3b0443ffb5"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c50f4a78-29be-48c8-ab50-a53f5e80e9a2"
+                LastKnownName="old-Style Scripts : Old-Style Scripts"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="80bbee5b-f823-4338-89c8-3544405a7a4b"
+            name="MessageOccurrenceSpecification16">
+            <covered>
+              <lifelineMoniker
+                Id="c50f4a78-29be-48c8-ab50-a53f5e80e9a2"
+                LastKnownName="old-Style Scripts : Old-Style Scripts"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="1ef0b142-e072-44b0-b5bd-e6b2416caef8"
+            name="ExecutionOccurrenceSpecification12">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="77fbd480-e705-41a9-acc7-d0389cc1b8d0"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c50f4a78-29be-48c8-ab50-a53f5e80e9a2"
+                LastKnownName="old-Style Scripts : Old-Style Scripts"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="f008064d-ffb0-453b-8ab0-a0a8d3454df7"
+            name="BehaviorExecutionSpecification7">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="9e3eacac-ad7e-4d80-89c8-480fe16f23b1"
+                LastKnownName="script2Message Interface Exec : Script2Message Interface Exec"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="3f9ba0d1-1f4e-47f2-9fe0-c7e7d592f012"
+                LastKnownName="ExecutionOccurrenceSpecification14"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="ef79aa44-f27d-4564-a52f-911ec24e3b3a"
+                LastKnownName="ExecutionOccurrenceSpecification13"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="86affbed-d87b-466c-99ab-dda45680b971"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="95ad8b3a-e1e7-407e-9b50-6dffd018942b"
+                LastKnownName="MessageOccurrenceSpecification29"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="ef79aa44-f27d-4564-a52f-911ec24e3b3a"
+            name="ExecutionOccurrenceSpecification13">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="da313faa-6c88-4f5d-9f6e-4b777b7650b3"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9e3eacac-ad7e-4d80-89c8-480fe16f23b1"
+                LastKnownName="script2Message Interface Exec : Script2Message Interface Exec"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6adb6ea1-cd31-4551-a669-28f645f9fd00"
+            name="MessageOccurrenceSpecification17">
+            <covered>
+              <lifelineMoniker
+                Id="c50f4a78-29be-48c8-ab50-a53f5e80e9a2"
+                LastKnownName="old-Style Scripts : Old-Style Scripts"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="86affbed-d87b-466c-99ab-dda45680b971"
+            name="MessageOccurrenceSpecification18">
+            <covered>
+              <lifelineMoniker
+                Id="9e3eacac-ad7e-4d80-89c8-480fe16f23b1"
+                LastKnownName="script2Message Interface Exec : Script2Message Interface Exec"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="0dd89e8f-e326-4c77-abdf-0f2683c1f437"
+            name="ExecutionOccurrenceSpecification10">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="96eba5ad-7d90-4cc4-876f-c2ea554f1e01"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c50f4a78-29be-48c8-ab50-a53f5e80e9a2"
+                LastKnownName="old-Style Scripts : Old-Style Scripts"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="4c2f7eda-98c7-4bdc-9adf-bcdcfe350fdf"
+            name="BehaviorExecutionSpecification11">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="a8d16b2e-6cfe-4bb3-88fe-00de7a38489f"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="41f97588-4233-4974-adff-c9adce2feb07"
+                LastKnownName="ExecutionOccurrenceSpecification22"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="7a5567e6-a49c-481d-80eb-b32d902a9e59"
+                LastKnownName="ExecutionOccurrenceSpecification21"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="a3ded953-9c5c-42e6-884b-3a664f895aa0"
+                LastKnownName="MessageOccurrenceSpecification30"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="7a5567e6-a49c-481d-80eb-b32d902a9e59"
+            name="ExecutionOccurrenceSpecification21">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="3bd428a0-51ad-4e50-972f-d2fcc71db720"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a8d16b2e-6cfe-4bb3-88fe-00de7a38489f"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="95ad8b3a-e1e7-407e-9b50-6dffd018942b"
+            name="MessageOccurrenceSpecification29">
+            <covered>
+              <lifelineMoniker
+                Id="9e3eacac-ad7e-4d80-89c8-480fe16f23b1"
+                LastKnownName="script2Message Interface Exec : Script2Message Interface Exec"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="a3ded953-9c5c-42e6-884b-3a664f895aa0"
+            name="MessageOccurrenceSpecification30">
+            <covered>
+              <lifelineMoniker
+                Id="a8d16b2e-6cfe-4bb3-88fe-00de7a38489f"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="3f9ba0d1-1f4e-47f2-9fe0-c7e7d592f012"
+            name="ExecutionOccurrenceSpecification14">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="bc1d7cd7-7660-4cf6-a5cd-c3b90a033366"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="9e3eacac-ad7e-4d80-89c8-480fe16f23b1"
+                LastKnownName="script2Message Interface Exec : Script2Message Interface Exec"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="41f97588-4233-4974-adff-c9adce2feb07"
+            name="ExecutionOccurrenceSpecification22">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="0b5944c9-6ba1-4390-868b-4f06a603efda"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a8d16b2e-6cfe-4bb3-88fe-00de7a38489f"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="44ca8c0c-5ae0-4fb0-a2ad-09dc50aa551b"
+            name="BehaviorExecutionSpecification12">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="a8d16b2e-6cfe-4bb3-88fe-00de7a38489f"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="57c0f70a-f933-4908-a268-d34d8c17cc1e"
+                LastKnownName="ExecutionOccurrenceSpecification24"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="09619525-f3c5-41a4-b0b9-661615a6bdd9"
+                LastKnownName="ExecutionOccurrenceSpecification23"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="da009505-baa6-401c-86e5-28304e2c13c6"
+                LastKnownName="MessageOccurrenceSpecification32"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="31c301dd-08a3-4bcb-ad6a-7802a12d7632"
+                LastKnownName="MessageOccurrenceSpecification33"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="09619525-f3c5-41a4-b0b9-661615a6bdd9"
+            name="ExecutionOccurrenceSpecification23">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="83bdd97c-c71f-4a68-84a6-398ac0708f74"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a8d16b2e-6cfe-4bb3-88fe-00de7a38489f"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="da009505-baa6-401c-86e5-28304e2c13c6"
+            name="MessageOccurrenceSpecification32">
+            <covered>
+              <lifelineMoniker
+                Id="a8d16b2e-6cfe-4bb3-88fe-00de7a38489f"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0ee3a5b3-0029-46d8-ac9a-8975c680dcbc"
+            name="MessageOccurrenceSpecification31">
+            <covered>
+              <lifelineMoniker
+                Id="ad7310be-6294-49c0-97b6-7aa04f0c4f09"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="31c301dd-08a3-4bcb-ad6a-7802a12d7632"
+            name="MessageOccurrenceSpecification33">
+            <covered>
+              <lifelineMoniker
+                Id="a8d16b2e-6cfe-4bb3-88fe-00de7a38489f"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="767cd9f2-c11c-4884-906f-486fecd5160b"
+            name="MessageOccurrenceSpecification34">
+            <covered>
+              <lifelineMoniker
+                Id="ad7310be-6294-49c0-97b6-7aa04f0c4f09"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="57c0f70a-f933-4908-a268-d34d8c17cc1e"
+            name="ExecutionOccurrenceSpecification24">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="807c5552-7c9f-4960-ab72-507fd3a8534f"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a8d16b2e-6cfe-4bb3-88fe-00de7a38489f"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="c5c1dc4c-94f5-4fb3-b074-7e4371277279"
+            name="BehaviorExecutionSpecification13">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="740cab26-771e-4d6e-b100-9c88d25d2dd9"
+                LastKnownName="ExecutionOccurrenceSpecification26"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="6e8f5dec-dce1-45d2-ad94-bb9e1a2783b3"
+                LastKnownName="ExecutionOccurrenceSpecification25"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="e7502f95-78cf-4e15-b07d-545761283d62"
+                LastKnownName="MessageOccurrenceSpecification36"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="1f100dd3-3cc0-400e-ac4a-95c2d0a2f9ec"
+                LastKnownName="MessageOccurrenceSpecification37"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="6e8f5dec-dce1-45d2-ad94-bb9e1a2783b3"
+            name="ExecutionOccurrenceSpecification25">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="f0b2849e-eef3-49eb-b687-49234bc4dbd0"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e7502f95-78cf-4e15-b07d-545761283d62"
+            name="MessageOccurrenceSpecification36">
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e4c748d1-c5e0-440c-81af-0b0c6d54efef"
+            name="MessageOccurrenceSpecification35">
+            <covered>
+              <lifelineMoniker
+                Id="ad7310be-6294-49c0-97b6-7aa04f0c4f09"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="ef905c0a-5f8e-4e66-9860-502ff4d3aa12"
+            name="MessageOccurrenceSpecification38">
+            <covered>
+              <lifelineMoniker
+                Id="ad7310be-6294-49c0-97b6-7aa04f0c4f09"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="1f100dd3-3cc0-400e-ac4a-95c2d0a2f9ec"
+            name="MessageOccurrenceSpecification37">
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="740cab26-771e-4d6e-b100-9c88d25d2dd9"
+            name="ExecutionOccurrenceSpecification26">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="f7d10110-c951-4144-b461-0e7ac7fb6cfd"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="c62b2be2-6308-4350-95b4-0c33f8aaaf1b"
+            name="BehaviorExecutionSpecification14">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="dbdc6490-ae6e-4574-bb83-2a053926636c"
+                LastKnownName="ExecutionOccurrenceSpecification28"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="c7372525-88e6-4835-a69e-44d7a53aabce"
+                LastKnownName="ExecutionOccurrenceSpecification27"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="ac7c7667-d763-452f-a8a7-c94ba1400ab2"
+                LastKnownName="MessageOccurrenceSpecification40"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="0321561b-2e11-49df-a6a7-f63e23894f95"
+                LastKnownName="MessageOccurrenceSpecification41"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="c7372525-88e6-4835-a69e-44d7a53aabce"
+            name="ExecutionOccurrenceSpecification27">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="a63dd6f1-ea67-4a38-a8c9-138ce16f3a5a"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0b2d7964-31b6-4ae6-8030-bde1376010f7"
+            name="MessageOccurrenceSpecification39">
+            <covered>
+              <lifelineMoniker
+                Id="ad7310be-6294-49c0-97b6-7aa04f0c4f09"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="ac7c7667-d763-452f-a8a7-c94ba1400ab2"
+            name="MessageOccurrenceSpecification40">
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0321561b-2e11-49df-a6a7-f63e23894f95"
+            name="MessageOccurrenceSpecification41">
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6b0b03e7-033a-436a-a28e-d01e2b2f498f"
+            name="MessageOccurrenceSpecification42">
+            <covered>
+              <lifelineMoniker
+                Id="ad7310be-6294-49c0-97b6-7aa04f0c4f09"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="dbdc6490-ae6e-4574-bb83-2a053926636c"
+            name="ExecutionOccurrenceSpecification28">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="153b5974-580c-40e5-a31b-7760b466d29f"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="8312de80-2cd6-46a3-a2f9-57628251723b"
+            name="BehaviorExecutionSpecification15">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="b9800b42-0e27-4233-866f-a58e39bf6b18"
+                LastKnownName="ExecutionOccurrenceSpecification30"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="3f8cdc09-1d86-4a1a-9ec3-a48ed842e667"
+                LastKnownName="ExecutionOccurrenceSpecification29"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="780a51f6-1318-4776-8ee0-00648d7e7408"
+                LastKnownName="MessageOccurrenceSpecification44"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="6ac2ccde-d5a6-4840-8969-f18ecd7717dc"
+                LastKnownName="MessageOccurrenceSpecification45"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="3f8cdc09-1d86-4a1a-9ec3-a48ed842e667"
+            name="ExecutionOccurrenceSpecification29">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="4f80b0a8-c1d0-4b20-b638-416510def533"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="780a51f6-1318-4776-8ee0-00648d7e7408"
+            name="MessageOccurrenceSpecification44">
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="bfde6368-cbdf-42e7-89e6-d0e7ceef3323"
+            name="MessageOccurrenceSpecification43">
+            <covered>
+              <lifelineMoniker
+                Id="ad7310be-6294-49c0-97b6-7aa04f0c4f09"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="8a7efecb-fd62-44b1-a8ef-ba070c767b0a"
+            name="MessageOccurrenceSpecification46">
+            <covered>
+              <lifelineMoniker
+                Id="ad7310be-6294-49c0-97b6-7aa04f0c4f09"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6ac2ccde-d5a6-4840-8969-f18ecd7717dc"
+            name="MessageOccurrenceSpecification45">
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="b9800b42-0e27-4233-866f-a58e39bf6b18"
+            name="ExecutionOccurrenceSpecification30">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="121444ac-d3ac-4744-baa5-f8f119a28db3"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="fb594dc9-1e80-4f76-bb63-2c2a358cf1e6"
+            name="BehaviorExecutionSpecification16">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="46330a05-32a1-43b9-bacc-61ca4386d5cc"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="7ec4f055-55e6-49dc-87d3-820113f8794c"
+                LastKnownName="ExecutionOccurrenceSpecification32"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="98672282-aae4-4fa0-9fb4-b983e71d522d"
+                LastKnownName="ExecutionOccurrenceSpecification31"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="d01568b0-7ad0-4fe5-844f-6e444eaf016a"
+                LastKnownName="MessageOccurrenceSpecification48"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="98672282-aae4-4fa0-9fb4-b983e71d522d"
+            name="ExecutionOccurrenceSpecification31">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="aeae58d2-10d7-4279-b4b0-395ab9464afe"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="46330a05-32a1-43b9-bacc-61ca4386d5cc"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e4c37afb-171a-4e86-931d-afa34aa2b73a"
+            name="MessageOccurrenceSpecification47">
+            <covered>
+              <lifelineMoniker
+                Id="ad7310be-6294-49c0-97b6-7aa04f0c4f09"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="d01568b0-7ad0-4fe5-844f-6e444eaf016a"
+            name="MessageOccurrenceSpecification48">
+            <covered>
+              <lifelineMoniker
+                Id="46330a05-32a1-43b9-bacc-61ca4386d5cc"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="7ec4f055-55e6-49dc-87d3-820113f8794c"
+            name="ExecutionOccurrenceSpecification32">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="69c85598-e675-4a98-b634-d66bde6b83dc"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="46330a05-32a1-43b9-bacc-61ca4386d5cc"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="34adb443-296f-4fb3-a54f-ed29cdde187c"
+            name="oEEngine-ScriptRunner : OEEngine-ScriptRunner"
+            isActor="false"
+            lifelineDisplayName="oEEngine-ScriptRunner : OEEngine-ScriptRunner">
+            <represents>
+              <propertyMoniker
+                Id="4e5ab929-cb8c-48f8-a8de-f129ec4f8500"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="0eb297ec-b244-4cc6-a2c2-9ad2e79c462f"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="efd49c66-22f7-44a2-8180-931844e11106"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="22e23b84-d220-4d2a-8aac-13be35a680bf"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="283249e9-6d16-49af-8277-cae8c30ae684"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="8ad421cc-ad42-4ca9-98c7-5e2c6ca7da85"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="8b590d16-434e-4253-ada0-b4e6db05abff"
+                LastKnownName="MessageOccurrenceSpecification13"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="3675601a-1eb8-46ab-a3f9-031b0738e423"
+            name="oEDatabase : OEDatabase"
+            isActor="false"
+            lifelineDisplayName="oEDatabase : OEDatabase">
+            <represents>
+              <propertyMoniker
+                Id="fa189463-14c7-48bd-8872-31cc66dd24c9"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="963ce6b3-62cc-4ccc-8ccc-8e27d4e87654"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="e0d3eb9c-b9b1-49ea-9b48-c57134b5dffa"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="6e8f5dec-dce1-45d2-ad94-bb9e1a2783b3"
+                LastKnownName="ExecutionOccurrenceSpecification25"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="740cab26-771e-4d6e-b100-9c88d25d2dd9"
+                LastKnownName="ExecutionOccurrenceSpecification26"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="c7372525-88e6-4835-a69e-44d7a53aabce"
+                LastKnownName="ExecutionOccurrenceSpecification27"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="dbdc6490-ae6e-4574-bb83-2a053926636c"
+                LastKnownName="ExecutionOccurrenceSpecification28"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="3f8cdc09-1d86-4a1a-9ec3-a48ed842e667"
+                LastKnownName="ExecutionOccurrenceSpecification29"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="b9800b42-0e27-4233-866f-a58e39bf6b18"
+                LastKnownName="ExecutionOccurrenceSpecification30"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="9b60ecc6-c4ba-421d-85f9-e6c660c7f9c1"
+            name="scriptCaller Message Queue : ScriptCaller Message Queue"
+            isActor="false"
+            lifelineDisplayName="scriptCaller Message Queue : ScriptCaller Message Queue">
+            <represents>
+              <propertyMoniker
+                Id="8af04cd6-4c0d-41ad-91ed-9a1c02178895"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="8bd53686-836f-4cee-bb0b-65c581b0fd6f"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="7b35fa1c-c954-4843-88f6-9ca4e52a7525"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="dfc6bf35-0e4a-47bf-a415-52c5e4c51593"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="9b9c040a-4177-4235-82b8-ffa7367d7023"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="c50f4a78-29be-48c8-ab50-a53f5e80e9a2"
+            name="old-Style Scripts : Old-Style Scripts"
+            isActor="false"
+            lifelineDisplayName="old-Style Scripts : Old-Style Scripts">
+            <represents>
+              <propertyMoniker
+                Id="f7c1f016-0596-4276-b751-a2ef96ba502e"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="f754d49b-84bc-4d41-a746-b8c1077dd772"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="0dd89e8f-e326-4c77-abdf-0f2683c1f437"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="9e3eacac-ad7e-4d80-89c8-480fe16f23b1"
+            name="script2Message Interface Exec : Script2Message Interface Exec"
+            isActor="false"
+            lifelineDisplayName="script2Message Interface Exec : Script2Message Interface Exec">
+            <represents>
+              <propertyMoniker
+                Id="9ffb4840-78a9-4291-8af7-bcb5aebe0468"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="ef79aa44-f27d-4564-a52f-911ec24e3b3a"
+                LastKnownName="ExecutionOccurrenceSpecification13"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="3f9ba0d1-1f4e-47f2-9fe0-c7e7d592f012"
+                LastKnownName="ExecutionOccurrenceSpecification14"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="a8d16b2e-6cfe-4bb3-88fe-00de7a38489f"
+            name="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+            isActor="false"
+            lifelineDisplayName="valkyrieStepControlQueue : ValkyrieStepControlQueue">
+            <represents>
+              <propertyMoniker
+                Id="0f93b84d-0d52-4e71-b14d-99655e7a31e8"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="7a5567e6-a49c-481d-80eb-b32d902a9e59"
+                LastKnownName="ExecutionOccurrenceSpecification21"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="41f97588-4233-4974-adff-c9adce2feb07"
+                LastKnownName="ExecutionOccurrenceSpecification22"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="09619525-f3c5-41a4-b0b9-661615a6bdd9"
+                LastKnownName="ExecutionOccurrenceSpecification23"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="57c0f70a-f933-4908-a268-d34d8c17cc1e"
+                LastKnownName="ExecutionOccurrenceSpecification24"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="ad7310be-6294-49c0-97b6-7aa04f0c4f09"
+            name="valkyrieController : ValkyrieController"
+            isActor="false"
+            lifelineDisplayName="valkyrieController : ValkyrieController">
+            <represents>
+              <propertyMoniker
+                Id="0ea7e3fd-43ca-444b-b582-2a5bf7c7e993"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="0ee3a5b3-0029-46d8-ac9a-8975c680dcbc"
+                LastKnownName="MessageOccurrenceSpecification31"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="767cd9f2-c11c-4884-906f-486fecd5160b"
+                LastKnownName="MessageOccurrenceSpecification34"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="e4c748d1-c5e0-440c-81af-0b0c6d54efef"
+                LastKnownName="MessageOccurrenceSpecification35"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="ef905c0a-5f8e-4e66-9860-502ff4d3aa12"
+                LastKnownName="MessageOccurrenceSpecification38"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="0b2d7964-31b6-4ae6-8030-bde1376010f7"
+                LastKnownName="MessageOccurrenceSpecification39"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="6b0b03e7-033a-436a-a28e-d01e2b2f498f"
+                LastKnownName="MessageOccurrenceSpecification42"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="bfde6368-cbdf-42e7-89e6-d0e7ceef3323"
+                LastKnownName="MessageOccurrenceSpecification43"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="8a7efecb-fd62-44b1-a8ef-ba070c767b0a"
+                LastKnownName="MessageOccurrenceSpecification46"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="e4c37afb-171a-4e86-931d-afa34aa2b73a"
+                LastKnownName="MessageOccurrenceSpecification47"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="46330a05-32a1-43b9-bacc-61ca4386d5cc"
+            name="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+            isActor="false"
+            lifelineDisplayName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue">
+            <represents>
+              <propertyMoniker
+                Id="83f58341-18c2-4baa-a999-0585a7975aef"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="98672282-aae4-4fa0-9fb4-b983e71d522d"
+                LastKnownName="ExecutionOccurrenceSpecification31"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="7ec4f055-55e6-49dc-87d3-820113f8794c"
+                LastKnownName="ExecutionOccurrenceSpecification32"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="31acf154-e33b-4697-aa0e-d66fde62cd13"
+            name="GetSteps"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="0eb297ec-b244-4cc6-a2c2-9ad2e79c462f"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="451a1bc9-4617-49c4-87eb-03f201786aec"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="8318503c-15a6-49ce-9c10-88dbd1a9e3c8"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="a30e6071-9203-4b09-83a4-0dcff5614281"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="efd49c66-22f7-44a2-8180-931844e11106"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="c94b8212-3313-45da-abd9-588b7c1d17c0"
+            name="Insert Script Call Messages"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="22e23b84-d220-4d2a-8aac-13be35a680bf"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="ad24d30a-ff1f-4755-a0bd-5d9884692354"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="4df5c577-7026-4978-9467-f68220ab8ad9"
+            name="Get Next Script Call Message"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="283249e9-6d16-49af-8277-cae8c30ae684"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="d474bbbf-5c86-4ccd-83aa-6d72671269c3"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="71c77901-a598-4b98-9179-e58675f970fd"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="4c3fce92-7a22-4a81-9ccf-c620d8d6c948"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="8ad421cc-ad42-4ca9-98c7-5e2c6ca7da85"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="3ecee69c-f28f-4813-b43b-9fb7fc3fc2a8"
+            name="Call Next Script"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="8b590d16-434e-4253-ada0-b4e6db05abff"
+                LastKnownName="MessageOccurrenceSpecification13"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6fab4cde-a18b-498a-95f4-f8f85399ca91"
+                LastKnownName="MessageOccurrenceSpecification14"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="22f56090-a2fa-496c-b494-bc890b1e3b5e"
+            name="Complete Script Exec"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="true">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="5ca71e4e-0ab3-42f1-841f-89e9413e7df5"
+                LastKnownName="MessageOccurrenceSpecification15"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="80bbee5b-f823-4338-89c8-3544405a7a4b"
+                LastKnownName="MessageOccurrenceSpecification16"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="846d0374-1e22-4fe0-8b14-686427b6ad3e"
+            name="Signal Step Complete"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6adb6ea1-cd31-4551-a669-28f645f9fd00"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="86affbed-d87b-466c-99ab-dda45680b971"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="b1bee80c-4489-425c-bba7-1e56a46c3a3e"
+            name="Insert Complete Message"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="95ad8b3a-e1e7-407e-9b50-6dffd018942b"
+                LastKnownName="MessageOccurrenceSpecification29"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="a3ded953-9c5c-42e6-884b-3a664f895aa0"
+                LastKnownName="MessageOccurrenceSpecification30"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="71c517ea-456c-420d-a4f7-4cfbba7fa45a"
+            name="Get Complete Messages"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="0ee3a5b3-0029-46d8-ac9a-8975c680dcbc"
+                LastKnownName="MessageOccurrenceSpecification31"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="da009505-baa6-401c-86e5-28304e2c13c6"
+                LastKnownName="MessageOccurrenceSpecification32"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="db4b16b8-5b7a-4c81-ae61-3c410d046ad5"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="31c301dd-08a3-4bcb-ad6a-7802a12d7632"
+                LastKnownName="MessageOccurrenceSpecification33"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="767cd9f2-c11c-4884-906f-486fecd5160b"
+                LastKnownName="MessageOccurrenceSpecification34"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="ccf75cbe-fc79-40c7-a777-02a372b2856d"
+            name="Update Step in Database"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e4c748d1-c5e0-440c-81af-0b0c6d54efef"
+                LastKnownName="MessageOccurrenceSpecification35"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e7502f95-78cf-4e15-b07d-545761283d62"
+                LastKnownName="MessageOccurrenceSpecification36"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="cb882d40-9ade-4960-b1bf-9585afa6250f"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="1f100dd3-3cc0-400e-ac4a-95c2d0a2f9ec"
+                LastKnownName="MessageOccurrenceSpecification37"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="ef905c0a-5f8e-4e66-9860-502ff4d3aa12"
+                LastKnownName="MessageOccurrenceSpecification38"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="8fd870cc-a13e-4b73-a6b5-5add7a26377e"
+            name="Get Steps to Insert"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="0b2d7964-31b6-4ae6-8030-bde1376010f7"
+                LastKnownName="MessageOccurrenceSpecification39"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="ac7c7667-d763-452f-a8a7-c94ba1400ab2"
+                LastKnownName="MessageOccurrenceSpecification40"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="675b4972-9ffb-4116-87aa-68272763db41"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="0321561b-2e11-49df-a6a7-f63e23894f95"
+                LastKnownName="MessageOccurrenceSpecification41"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6b0b03e7-033a-436a-a28e-d01e2b2f498f"
+                LastKnownName="MessageOccurrenceSpecification42"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="4dbf638b-8e20-4675-84b2-1bd439b83351"
+            name="Insert Steps / Set to Active"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="bfde6368-cbdf-42e7-89e6-d0e7ceef3323"
+                LastKnownName="MessageOccurrenceSpecification43"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="780a51f6-1318-4776-8ee0-00648d7e7408"
+                LastKnownName="MessageOccurrenceSpecification44"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="89901fd4-b134-431d-98c8-d162cdc8ac92"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6ac2ccde-d5a6-4840-8969-f18ecd7717dc"
+                LastKnownName="MessageOccurrenceSpecification45"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="8a7efecb-fd62-44b1-a8ef-ba070c767b0a"
+                LastKnownName="MessageOccurrenceSpecification46"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="a80c6db9-171e-416e-bc8e-8262135132ed"
+            name="Insert To Process Messages"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e4c37afb-171a-4e86-931d-afa34aa2b73a"
+                LastKnownName="MessageOccurrenceSpecification47"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="d01568b0-7ad0-4fe5-844f-6e444eaf016a"
+                LastKnownName="MessageOccurrenceSpecification48"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+        <ownedAttributesInternal>
+          <property
+            Id="4e5ab929-cb8c-48f8-a8de-f129ec4f8500"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="bac7a3d8-e137-4d53-ab5c-76e21a066f9e"
+                LastKnownName="OEEngine-ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="fa189463-14c7-48bd-8872-31cc66dd24c9"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="29c5381f-5efb-44dd-9c5d-e6b7c0a898a3"
+                LastKnownName="OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="8af04cd6-4c0d-41ad-91ed-9a1c02178895"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="3a09f770-8300-4ae1-b28c-29052e530156"
+                LastKnownName="ScriptCaller Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="f7c1f016-0596-4276-b751-a2ef96ba502e"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="b94175cd-0be2-48ae-b3e4-8053b337cabb"
+                LastKnownName="Old-Style Scripts"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="9ffb4840-78a9-4291-8af7-bcb5aebe0468"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="d3265a1b-d535-4ac7-80e2-905c78de64b5"
+                LastKnownName="Script2Message Interface Exec"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="0ea7e3fd-43ca-444b-b582-2a5bf7c7e993"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="6cc60a68-dff9-4e24-9197-2fc18b38141a"
+                LastKnownName="ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="0f93b84d-0d52-4e71-b14d-99655e7a31e8"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="9fac6f28-2b78-47d7-8bdb-fa0a7fc60eec"
+                LastKnownName="ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="83f58341-18c2-4baa-a999-0585a7975aef"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="af7cd85c-0ed5-4abf-9153-f56a4d1ec917"
+                LastKnownName="Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="29c5381f-5efb-44dd-9c5d-e6b7c0a898a3"
+        name="OEDatabase"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="8848e66b-e1b2-4963-8253-fe8db5b16395"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="2f89c6ce-b8a8-43c5-a202-291a6a3c49a7"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="dab735d8-0ec6-4725-81b0-c28a788b1107"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="eb846687-5ae7-4985-9486-cfdb8b74c695"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="d6ab8911-8a4f-49c3-9389-f9aca3e20926"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="cf3d90b6-7ea9-469f-a714-f29eef36d3fd"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="85ee49f8-c8d2-4ae7-ba3d-abd7237ea92e"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="96eba5ad-7d90-4cc4-876f-c2ea554f1e01"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="139fb66d-3cbf-4ecc-8476-0f3b0443ffb5"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="77fbd480-e705-41a9-acc7-d0389cc1b8d0"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="da313faa-6c88-4f5d-9f6e-4b777b7650b3"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="bc1d7cd7-7660-4cf6-a5cd-c3b90a033366"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="9fac6f28-2b78-47d7-8bdb-fa0a7fc60eec"
+        name="ValkyrieStepControlQueue"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="3434f4da-d6dc-491b-b803-ea0619ab7c89"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="9aabe70b-464f-49ab-b0b3-055ad4b182a7"
+                LastKnownName="MessageQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="9aabe70b-464f-49ab-b0b3-055ad4b182a7"
+        name="MessageQueue"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="0b0a13b9-cea0-4d88-bba6-9429e280521b"
+        name="Read/Write"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="7b400a07-0b29-411f-9fb1-04e63ba097a0"
+        name="Read/Write"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="3bd428a0-51ad-4e50-972f-d2fcc71db720"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="0b5944c9-6ba1-4390-868b-4f06a603efda"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="83bdd97c-c71f-4a68-84a6-398ac0708f74"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="807c5552-7c9f-4960-ab72-507fd3a8534f"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="f0b2849e-eef3-49eb-b687-49234bc4dbd0"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="f7d10110-c951-4144-b461-0e7ac7fb6cfd"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="a63dd6f1-ea67-4a38-a8c9-138ce16f3a5a"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="153b5974-580c-40e5-a31b-7760b466d29f"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="4f80b0a8-c1d0-4b20-b638-416510def533"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="121444ac-d3ac-4744-baa5-f8f119a28db3"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="af7cd85c-0ed5-4abf-9153-f56a4d1ec917"
+        name="Valkyrie ToProcess Message Queue"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="72d7fa0c-7c76-4773-b38e-32c6dfd69983"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="e7184640-545c-4692-9793-f21e67beaad6"
+                LastKnownName="Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="e7184640-545c-4692-9793-f21e67beaad6"
+        name="Message Queue"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="4df296b1-455a-4996-b557-e48c1601df49"
+        name="NewStyle ScriptRunner"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="b3385cc8-7065-4607-a96e-e02568c0330f"
+            isSubstitutable="false">
+            <componentMoniker
+              Id="a02930a2-2ad7-4831-903c-51f677339c33"
+              LastKnownName="ValkyrieProcessor"
+              LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <requiredInterface
+            Id="f397d33c-765e-472a-94a4-4a4bdbaa0a68"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="3062df17-6022-46cb-b8fb-71d32250aae7">
+                <providedInterfaceMoniker
+                  Id="72d7fa0c-7c76-4773-b38e-32c6dfd69983"
+                  LastKnownName="Port1"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="7e36bbe2-9491-4d71-9950-b08ee20d23b1"
+                LastKnownName="Reads"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="7e36bbe2-9491-4d71-9950-b08ee20d23b1"
+        name="Reads"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="aeae58d2-10d7-4279-b4b0-395ab9464afe"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="69c85598-e675-4a98-b634-d66bde6b83dc"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="09a10adf-3505-4151-8b5e-ec1f484226c1"
+        name="NewStyleStepProcessing"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <ownedCommentsInternal>
+          <comment
+            Id="bf4801a8-bc1b-472b-bbd0-4df3613a49cd">
+            <body>This round-trip is actually unnessiary.
+
+It would be more effeciant for the message to contain the entire decendant tree for it's particular step, which would eliminate the need to hit the database again.
+
+However, this is left out for now to make the process more simple.</body>
+            <annotatedElements>
+              <behaviorExecutionSpecificationMoniker
+                Id="215f229d-f3c4-4217-b71d-939fe6da9e0f"
+                LastKnownName="BehaviorExecutionSpecification6"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </annotatedElements>
+          </comment>
+          <comment
+            Id="4cd6179e-269e-44c6-bf22-fe9614ee120c">
+            <body>If the current poll mechanism is set to completely ignore any new-style steps, then we should be able to set it to complete and handle the OE updates/inserts with the controller.  
+
+If we insert steps with old-style scripts, we may have to find a way to handle them here.  It would be perfectly reasonable to insert the "to process" messages, and then call these scripts (blocking) one at a time.  Running inside of an exe, there should be no time-out issues.</body>
+            <annotatedElements>
+              <behaviorExecutionSpecificationMoniker
+                Id="6ff26f8f-7475-4f06-b29a-ccf1883c8543"
+                LastKnownName="BehaviorExecutionSpecification8"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </annotatedElements>
+          </comment>
+        </ownedCommentsInternal>
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="c76c5bd9-d2c2-43ee-9253-8fecc6f5f0c6"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="6e327749-0f6c-4ab3-ac72-f135db8a6fc8"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="ddbe0fcd-660d-4f97-894d-cfba77310fd1"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="21e70fcc-2e63-49a3-952d-a3210fc5d4d8"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="f51afbb4-df63-4921-858e-d3e58f9499e9"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="f072938e-0250-4f74-96dd-e1219e7e58d2"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="21e70fcc-2e63-49a3-952d-a3210fc5d4d8"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="27d8d8b3-7a76-4447-b957-aaabd19a1be3"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="6e327749-0f6c-4ab3-ac72-f135db8a6fc8"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="f51afbb4-df63-4921-858e-d3e58f9499e9"
+            name="MessageOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="6e327749-0f6c-4ab3-ac72-f135db8a6fc8"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c882c090-d3db-4ff9-8703-8d912e682cf1"
+            name="MessageOccurrenceSpecification1">
+            <covered>
+              <lifelineMoniker
+                Id="beafde0f-7809-428e-bfb2-2ea14f2bada4"
+                LastKnownName="newStyle ScriptRunner : NewStyle ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="aa74711f-a55a-41f2-96d0-b8ac19b20d35"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="beafde0f-7809-428e-bfb2-2ea14f2bada4"
+                LastKnownName="newStyle ScriptRunner : NewStyle ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="f072938e-0250-4f74-96dd-e1219e7e58d2"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="6e327749-0f6c-4ab3-ac72-f135db8a6fc8"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="ddbe0fcd-660d-4f97-894d-cfba77310fd1"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="1bc5e5f5-ed27-4d3c-b60b-58e409911b8b"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="6e327749-0f6c-4ab3-ac72-f135db8a6fc8"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="49258516-a385-4a70-9153-f8b7f72cbaf1"
+            name="MessageOccurrenceSpecification5">
+            <covered>
+              <lifelineMoniker
+                Id="beafde0f-7809-428e-bfb2-2ea14f2bada4"
+                LastKnownName="newStyle ScriptRunner : NewStyle ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="06578a68-4b68-47f1-8955-07ff8dc73908"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="beafde0f-7809-428e-bfb2-2ea14f2bada4"
+                LastKnownName="newStyle ScriptRunner : NewStyle ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="23bd0b95-d5ef-4feb-8b44-b69993d3a7f5"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="31e02794-588a-4f41-88e4-744fa4487033"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="77534b98-eb77-4261-9d11-4401f0b986df"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="31e02794-588a-4f41-88e4-744fa4487033"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="d23013f9-ced5-4615-9bfa-c9b349c27ae0"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="beafde0f-7809-428e-bfb2-2ea14f2bada4"
+                LastKnownName="newStyle ScriptRunner : NewStyle ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="77534b98-eb77-4261-9d11-4401f0b986df"
+            name="MessageOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="beafde0f-7809-428e-bfb2-2ea14f2bada4"
+                LastKnownName="newStyle ScriptRunner : NewStyle ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="23bd0b95-d5ef-4feb-8b44-b69993d3a7f5"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="494924b5-da6c-4d5f-ad97-e873e121b05c"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="beafde0f-7809-428e-bfb2-2ea14f2bada4"
+                LastKnownName="newStyle ScriptRunner : NewStyle ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="73ef68b0-30fc-4099-8501-1baec5d7fd05"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="477ed8aa-1016-4417-a73a-56957466b902"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="e1099dd1-c63b-47ee-bc01-747089d476a3"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="d1f73bdd-b169-40a5-b664-6a26d872f673"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="ae0e0256-6b2e-4648-ad93-58a84520839d"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="d1f73bdd-b169-40a5-b664-6a26d872f673"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="2ae3fa81-1a3b-4a5e-b939-78291f29794c"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="477ed8aa-1016-4417-a73a-56957466b902"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="7449377a-e0b6-408f-b3b2-aa2e33b19f04"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="beafde0f-7809-428e-bfb2-2ea14f2bada4"
+                LastKnownName="newStyle ScriptRunner : NewStyle ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="ae0e0256-6b2e-4648-ad93-58a84520839d"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="477ed8aa-1016-4417-a73a-56957466b902"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="e1099dd1-c63b-47ee-bc01-747089d476a3"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="c74de206-facc-4648-8147-8f643589428e"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="477ed8aa-1016-4417-a73a-56957466b902"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="da05169d-dcea-40e4-a1c5-1e896b550a9f"
+            name="BehaviorExecutionSpecification4">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="477ed8aa-1016-4417-a73a-56957466b902"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="08149a8e-4673-4c88-92d2-811b8559100a"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="5e12da2b-c573-4718-acb9-b86dd00389f7"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="cd20d1ec-070b-4b92-b53f-9b46a8a6f0c5"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="caa8502f-3376-4419-ad96-3e21c1c4c4a7"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="5e12da2b-c573-4718-acb9-b86dd00389f7"
+            name="ExecutionOccurrenceSpecification7">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="bdfe60d3-09ea-437a-b899-377d84474a90"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="477ed8aa-1016-4417-a73a-56957466b902"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="cd20d1ec-070b-4b92-b53f-9b46a8a6f0c5"
+            name="MessageOccurrenceSpecification10">
+            <covered>
+              <lifelineMoniker
+                Id="477ed8aa-1016-4417-a73a-56957466b902"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="d10d31db-78cc-4cf7-b76e-657d724a6a35"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="3fe44214-6bf5-4e48-a4bc-805d74ef9ac5"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="9d84b169-5be6-4836-8815-37685de8808f"
+            name="MessageOccurrenceSpecification12">
+            <covered>
+              <lifelineMoniker
+                Id="3fe44214-6bf5-4e48-a4bc-805d74ef9ac5"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="caa8502f-3376-4419-ad96-3e21c1c4c4a7"
+            name="MessageOccurrenceSpecification11">
+            <covered>
+              <lifelineMoniker
+                Id="477ed8aa-1016-4417-a73a-56957466b902"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="08149a8e-4673-4c88-92d2-811b8559100a"
+            name="ExecutionOccurrenceSpecification8">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="9c4ec993-ec0e-4afc-8df2-39061d6be3fd"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="477ed8aa-1016-4417-a73a-56957466b902"
+                LastKnownName="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="a7249934-c088-422d-bfe4-462b627360e2"
+            name="BehaviorExecutionSpecification5">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="dc952e26-87a9-4f72-bd1b-1762268c128b"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="6cc774cb-953b-4785-b3a2-112c6630583c"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="1599be39-2ab0-4ff5-8954-3b57f9fc0e71"
+                LastKnownName="MessageOccurrenceSpecification14"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="19276a9a-8637-4e32-84b3-a22213e50d4a"
+                LastKnownName="MessageOccurrenceSpecification15"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="6cc774cb-953b-4785-b3a2-112c6630583c"
+            name="ExecutionOccurrenceSpecification9">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="57a4cc7b-b539-46ad-a1ff-09a523700884"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="00174030-fb39-4d8b-8b9c-059926b5f378"
+            name="MessageOccurrenceSpecification13">
+            <covered>
+              <lifelineMoniker
+                Id="3fe44214-6bf5-4e48-a4bc-805d74ef9ac5"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="1599be39-2ab0-4ff5-8954-3b57f9fc0e71"
+            name="MessageOccurrenceSpecification14">
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="19276a9a-8637-4e32-84b3-a22213e50d4a"
+            name="MessageOccurrenceSpecification15">
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6fd20e5e-1b38-44a7-84c1-71af603d1ace"
+            name="MessageOccurrenceSpecification16">
+            <covered>
+              <lifelineMoniker
+                Id="3fe44214-6bf5-4e48-a4bc-805d74ef9ac5"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="dc952e26-87a9-4f72-bd1b-1762268c128b"
+            name="ExecutionOccurrenceSpecification10">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="96c3b4f6-313a-4fe6-9897-616e0224933f"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="215f229d-f3c4-4217-b71d-939fe6da9e0f"
+            name="BehaviorExecutionSpecification6">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="323ac3fc-06e7-4234-8965-324062fa100d"
+                LastKnownName="ExecutionOccurrenceSpecification12"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="b2fbae94-7d48-43ea-a3fe-8f922b63ffa3"
+                LastKnownName="ExecutionOccurrenceSpecification11"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="47f04dfd-abbf-461e-9f9d-9382c973aafc"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="cdbfbcc4-9942-4fd8-9500-c50f6e7fb48d"
+                LastKnownName="MessageOccurrenceSpecification19"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="b2fbae94-7d48-43ea-a3fe-8f922b63ffa3"
+            name="ExecutionOccurrenceSpecification11">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="511979b4-581c-4161-bc5a-4e985efbd232"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="47f04dfd-abbf-461e-9f9d-9382c973aafc"
+            name="MessageOccurrenceSpecification18">
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="4d500ede-9408-4f78-abb8-c0d1fbd78df6"
+            name="MessageOccurrenceSpecification17">
+            <covered>
+              <lifelineMoniker
+                Id="3fe44214-6bf5-4e48-a4bc-805d74ef9ac5"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="ccf78c3e-f171-4b13-8879-b94e5f1babf5"
+            name="MessageOccurrenceSpecification20">
+            <covered>
+              <lifelineMoniker
+                Id="3fe44214-6bf5-4e48-a4bc-805d74ef9ac5"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="cdbfbcc4-9942-4fd8-9500-c50f6e7fb48d"
+            name="MessageOccurrenceSpecification19">
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="323ac3fc-06e7-4234-8965-324062fa100d"
+            name="ExecutionOccurrenceSpecification12">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="fb1bb79d-c354-469c-8fbc-ab59a8f74042"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="6ff26f8f-7475-4f06-b29a-ccf1883c8543"
+            name="BehaviorExecutionSpecification8">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="ce670e03-849d-430d-b9a9-453ba685f2e0"
+                LastKnownName="ExecutionOccurrenceSpecification16"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="fb521227-884c-4c75-ba22-3c1ea0c5ec40"
+                LastKnownName="ExecutionOccurrenceSpecification15"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="662738f2-0ead-4821-b121-83536f21ba40"
+                LastKnownName="MessageOccurrenceSpecification24"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="088c3bfc-6958-45a1-9f36-daf9cd7411ff"
+                LastKnownName="MessageOccurrenceSpecification25"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="fb521227-884c-4c75-ba22-3c1ea0c5ec40"
+            name="ExecutionOccurrenceSpecification15">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="d0702ac8-1ef6-427b-87a1-ef9f4da0fede"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="04213333-fe73-4682-a301-2e1ab9fc6742"
+            name="MessageOccurrenceSpecification23">
+            <covered>
+              <lifelineMoniker
+                Id="3fe44214-6bf5-4e48-a4bc-805d74ef9ac5"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="662738f2-0ead-4821-b121-83536f21ba40"
+            name="MessageOccurrenceSpecification24">
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="088c3bfc-6958-45a1-9f36-daf9cd7411ff"
+            name="MessageOccurrenceSpecification25">
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="547bb82c-674d-484d-8b5e-5c1d28c585ab"
+            name="MessageOccurrenceSpecification26">
+            <covered>
+              <lifelineMoniker
+                Id="3fe44214-6bf5-4e48-a4bc-805d74ef9ac5"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="ce670e03-849d-430d-b9a9-453ba685f2e0"
+            name="ExecutionOccurrenceSpecification16">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="33ad73c2-299b-45b3-8ac8-d4dcba3d7868"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+                LastKnownName="oEDatabase : OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="b6c2e140-e4c0-4cbe-8e90-3db6d21f8036"
+            name="BehaviorExecutionSpecification10">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="6e327749-0f6c-4ab3-ac72-f135db8a6fc8"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="9c93cb96-c404-442c-be98-d9301e4e0787"
+                LastKnownName="ExecutionOccurrenceSpecification20"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="40af6fa3-8788-416b-9178-c41bad27bb76"
+                LastKnownName="ExecutionOccurrenceSpecification19"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="148d836a-3ece-4e39-9a00-58d205f29732"
+                LastKnownName="MessageOccurrenceSpecification30"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="40af6fa3-8788-416b-9178-c41bad27bb76"
+            name="ExecutionOccurrenceSpecification19">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="89343e06-b6b4-4862-b6a8-ef73e9c2712f"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="6e327749-0f6c-4ab3-ac72-f135db8a6fc8"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="148d836a-3ece-4e39-9a00-58d205f29732"
+            name="MessageOccurrenceSpecification30">
+            <covered>
+              <lifelineMoniker
+                Id="6e327749-0f6c-4ab3-ac72-f135db8a6fc8"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="49db8c95-4bd8-4a4f-924f-9ca38b9faf7c"
+            name="MessageOccurrenceSpecification29">
+            <covered>
+              <lifelineMoniker
+                Id="3fe44214-6bf5-4e48-a4bc-805d74ef9ac5"
+                LastKnownName="valkyrieController : ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="9c93cb96-c404-442c-be98-d9301e4e0787"
+            name="ExecutionOccurrenceSpecification20">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="1990ea11-cbc8-4792-a9de-33539be14fa4"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="6e327749-0f6c-4ab3-ac72-f135db8a6fc8"
+                LastKnownName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="beafde0f-7809-428e-bfb2-2ea14f2bada4"
+            name="newStyle ScriptRunner : NewStyle ScriptRunner"
+            isActor="false"
+            lifelineDisplayName="newStyle ScriptRunner : NewStyle ScriptRunner">
+            <represents>
+              <propertyMoniker
+                Id="4436e4d9-98aa-4079-8b5c-2065b02877a7"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="c882c090-d3db-4ff9-8703-8d912e682cf1"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="aa74711f-a55a-41f2-96d0-b8ac19b20d35"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="49258516-a385-4a70-9153-f8b7f72cbaf1"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="31e02794-588a-4f41-88e4-744fa4487033"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="23bd0b95-d5ef-4feb-8b44-b69993d3a7f5"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="7449377a-e0b6-408f-b3b2-aa2e33b19f04"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="6e327749-0f6c-4ab3-ac72-f135db8a6fc8"
+            name="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue"
+            isActor="false"
+            lifelineDisplayName="valkyrie ToProcess Message Queue : Valkyrie ToProcess Message Queue">
+            <represents>
+              <propertyMoniker
+                Id="38eaffa5-321c-4acb-9efb-2b5fae107aa0"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="21e70fcc-2e63-49a3-952d-a3210fc5d4d8"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="ddbe0fcd-660d-4f97-894d-cfba77310fd1"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="40af6fa3-8788-416b-9178-c41bad27bb76"
+                LastKnownName="ExecutionOccurrenceSpecification19"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="9c93cb96-c404-442c-be98-d9301e4e0787"
+                LastKnownName="ExecutionOccurrenceSpecification20"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="477ed8aa-1016-4417-a73a-56957466b902"
+            name="valkyrieStepControlQueue : ValkyrieStepControlQueue"
+            isActor="false"
+            lifelineDisplayName="valkyrieStepControlQueue : ValkyrieStepControlQueue">
+            <represents>
+              <propertyMoniker
+                Id="0eb64542-30a1-4ddb-a47e-7b4785730da9"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="d1f73bdd-b169-40a5-b664-6a26d872f673"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="e1099dd1-c63b-47ee-bc01-747089d476a3"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="5e12da2b-c573-4718-acb9-b86dd00389f7"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="08149a8e-4673-4c88-92d2-811b8559100a"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="3fe44214-6bf5-4e48-a4bc-805d74ef9ac5"
+            name="valkyrieController : ValkyrieController"
+            isActor="false"
+            lifelineDisplayName="valkyrieController : ValkyrieController">
+            <represents>
+              <propertyMoniker
+                Id="f37261bd-1f41-4084-a204-0ea7b33f8ec2"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="d10d31db-78cc-4cf7-b76e-657d724a6a35"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="9d84b169-5be6-4836-8815-37685de8808f"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="00174030-fb39-4d8b-8b9c-059926b5f378"
+                LastKnownName="MessageOccurrenceSpecification13"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="6fd20e5e-1b38-44a7-84c1-71af603d1ace"
+                LastKnownName="MessageOccurrenceSpecification16"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="4d500ede-9408-4f78-abb8-c0d1fbd78df6"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="ccf78c3e-f171-4b13-8879-b94e5f1babf5"
+                LastKnownName="MessageOccurrenceSpecification20"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="04213333-fe73-4682-a301-2e1ab9fc6742"
+                LastKnownName="MessageOccurrenceSpecification23"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="547bb82c-674d-484d-8b5e-5c1d28c585ab"
+                LastKnownName="MessageOccurrenceSpecification26"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="49db8c95-4bd8-4a4f-924f-9ca38b9faf7c"
+                LastKnownName="MessageOccurrenceSpecification29"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="cf6b5258-b884-4bcb-ac22-9fff5d664af3"
+            name="oEDatabase : OEDatabase"
+            isActor="false"
+            lifelineDisplayName="oEDatabase : OEDatabase">
+            <represents>
+              <propertyMoniker
+                Id="89471696-8bb9-4e33-95cc-74139cfa0ba4"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="6cc774cb-953b-4785-b3a2-112c6630583c"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="dc952e26-87a9-4f72-bd1b-1762268c128b"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="b2fbae94-7d48-43ea-a3fe-8f922b63ffa3"
+                LastKnownName="ExecutionOccurrenceSpecification11"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="323ac3fc-06e7-4234-8965-324062fa100d"
+                LastKnownName="ExecutionOccurrenceSpecification12"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="fb521227-884c-4c75-ba22-3c1ea0c5ec40"
+                LastKnownName="ExecutionOccurrenceSpecification15"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="ce670e03-849d-430d-b9a9-453ba685f2e0"
+                LastKnownName="ExecutionOccurrenceSpecification16"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="6d316a52-cb80-4ffc-abcd-c974c1d2bb9b"
+            name="Get My Steps"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c882c090-d3db-4ff9-8703-8d912e682cf1"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="f51afbb4-df63-4921-858e-d3e58f9499e9"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="bd678dc0-11cf-48ae-96d7-df4695826574"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="f072938e-0250-4f74-96dd-e1219e7e58d2"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="aa74711f-a55a-41f2-96d0-b8ac19b20d35"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="6b0f529e-cde7-41e4-9993-ef1cc2d48282"
+            name="Execute Step Internally"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="true">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="49258516-a385-4a70-9153-f8b7f72cbaf1"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="77534b98-eb77-4261-9d11-4401f0b986df"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="9cc111b0-42a0-46d1-96f2-0d43a8fadae4"
+            name="Insert Complete Message"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="7449377a-e0b6-408f-b3b2-aa2e33b19f04"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="ae0e0256-6b2e-4648-ad93-58a84520839d"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="e9793512-110c-4cc8-b32d-1db41cede6b7"
+            name="Get Complete Messages"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="d10d31db-78cc-4cf7-b76e-657d724a6a35"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="cd20d1ec-070b-4b92-b53f-9b46a8a6f0c5"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="76a6a0e9-870d-4b87-adbe-1867cf8eb806"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="caa8502f-3376-4419-ad96-3e21c1c4c4a7"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="9d84b169-5be6-4836-8815-37685de8808f"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="ace73056-b52f-4f24-a170-26034ae6242b"
+            name="Update Step to Complete"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="00174030-fb39-4d8b-8b9c-059926b5f378"
+                LastKnownName="MessageOccurrenceSpecification13"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="1599be39-2ab0-4ff5-8954-3b57f9fc0e71"
+                LastKnownName="MessageOccurrenceSpecification14"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="4db84b7e-fdba-4361-9c6e-4554bb94e03d"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="19276a9a-8637-4e32-84b3-a22213e50d4a"
+                LastKnownName="MessageOccurrenceSpecification15"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6fd20e5e-1b38-44a7-84c1-71af603d1ace"
+                LastKnownName="MessageOccurrenceSpecification16"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="f5c0ff9d-95c6-41bc-bdb7-f3f6d9b7ce23"
+            name="Get  Steps to Insert"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="4d500ede-9408-4f78-abb8-c0d1fbd78df6"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="47f04dfd-abbf-461e-9f9d-9382c973aafc"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="eba0e71a-1451-4a5f-b881-3da99f687e98"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="cdbfbcc4-9942-4fd8-9500-c50f6e7fb48d"
+                LastKnownName="MessageOccurrenceSpecification19"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="ccf78c3e-f171-4b13-8879-b94e5f1babf5"
+                LastKnownName="MessageOccurrenceSpecification20"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="e4b60cae-0eca-4535-862a-e3aaac17bea4"
+            name="Insert Steps / Set to Active"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="04213333-fe73-4682-a301-2e1ab9fc6742"
+                LastKnownName="MessageOccurrenceSpecification23"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="662738f2-0ead-4821-b121-83536f21ba40"
+                LastKnownName="MessageOccurrenceSpecification24"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="1dca955b-e168-40bf-bc04-ba74db661ace"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="088c3bfc-6958-45a1-9f36-daf9cd7411ff"
+                LastKnownName="MessageOccurrenceSpecification25"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="547bb82c-674d-484d-8b5e-5c1d28c585ab"
+                LastKnownName="MessageOccurrenceSpecification26"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="22b8d495-046a-4a56-a484-fe0803a9cb7f"
+            name="Insert &quot;To Process&quot; Messages"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="49db8c95-4bd8-4a4f-924f-9ca38b9faf7c"
+                LastKnownName="MessageOccurrenceSpecification29"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="148d836a-3ece-4e39-9a00-58d205f29732"
+                LastKnownName="MessageOccurrenceSpecification30"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+        <ownedAttributesInternal>
+          <property
+            Id="4436e4d9-98aa-4079-8b5c-2065b02877a7"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="4df296b1-455a-4996-b557-e48c1601df49"
+                LastKnownName="NewStyle ScriptRunner"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="38eaffa5-321c-4acb-9efb-2b5fae107aa0"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="af7cd85c-0ed5-4abf-9153-f56a4d1ec917"
+                LastKnownName="Valkyrie ToProcess Message Queue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="0eb64542-30a1-4ddb-a47e-7b4785730da9"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="9fac6f28-2b78-47d7-8bdb-fa0a7fc60eec"
+                LastKnownName="ValkyrieStepControlQueue"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="f37261bd-1f41-4084-a204-0ea7b33f8ec2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="6cc60a68-dff9-4e24-9197-2fc18b38141a"
+                LastKnownName="ValkyrieController"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="89471696-8bb9-4e33-95cc-74139cfa0ba4"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <componentMoniker
+                Id="29c5381f-5efb-44dd-9c5d-e6b7c0a898a3"
+                LastKnownName="OEDatabase"
+                LastKnownLocation="ValkyrieOrderEngine-Model.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="27d8d8b3-7a76-4447-b957-aaabd19a1be3"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="1bc5e5f5-ed27-4d3c-b60b-58e409911b8b"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="d23013f9-ced5-4615-9bfa-c9b349c27ae0"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="494924b5-da6c-4d5f-ad97-e873e121b05c"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="2ae3fa81-1a3b-4a5e-b939-78291f29794c"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="c74de206-facc-4648-8147-8f643589428e"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="bdfe60d3-09ea-437a-b899-377d84474a90"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="9c4ec993-ec0e-4afc-8df2-39061d6be3fd"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="57a4cc7b-b539-46ad-a1ff-09a523700884"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="96c3b4f6-313a-4fe6-9897-616e0224933f"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="511979b4-581c-4161-bc5a-4e985efbd232"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="fb1bb79d-c354-469c-8fbc-ab59a8f74042"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="d0702ac8-1ef6-427b-87a1-ef9f4da0fede"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="33ad73c2-299b-45b3-8ac8-d4dcba3d7868"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="89343e06-b6b4-4862-b6a8-ef73e9c2712f"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="1990ea11-cbc8-4792-a9de-33539be14fa4"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

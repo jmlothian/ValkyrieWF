@@ -1,0 +1,128 @@
+﻿Controller Messages
+	Start
+	Stop
+	ReloadFromMasterDB
+	StartStepControlQueue
+		--needed to flush the step control queue without starting the whole system
+		--this needs to happen and finish before reloading the flow instance from the database
+Connections
+	Controller (broadcast) -> Processors, Queues
+	Processors <--> Controller (client/server)
+	Processors <--> Queues
+	Processor --> self, for multithreading and handling multiple steps at a time
+
+Queue object needs a deadletter system
+Startup
+	Controller
+		Load NodeList from database (Queues and Processors)
+		Signal QueueWFSteps StartStepControlQueue
+		Receive responses
+		Receive message (no-more-steps)
+		Send Startup to other queues
+			--wait for responses
+			--abort if error
+		Send Startup 
+
+	Queue
+
+Running
+	Controller
+		Either (Recieve Message of Insertion) OR (Poll DB for insertions)
+			--DB poll should be on a seperate thread, screw waiting around
+				--send a message to itself like it is waiting to receive from others
+		Put nextsteps into ValkQueueWFSteps
+	Processor
+
+//ORDER INSERTION
+Ok, BRT way of insertion is to insert the first step, and the order engine takes are of picking it up and inserting the next steps at each tick
+
+Lets not do that
+Instead, we have a seperate table with active instances(orders) which is inserted into
+	-polling system only looks here
+	-new order is inserted and set to "pending", 
+		the poller takes it
+		poller inserts ALL the steps for this order
+			//all steps are initially marked status "incomplete" prior to being "active"
+		poller sets order to 'active'
+		poller sends first step to the step queue, which will mark it as 'active'
+
+//Join resolution
+Upon completion of a step, two things happen.  
+	First, the child-items with only one parent will be inserted into the "active" queue
+	Second, child-items with multiple parents will go through a process
+		-search WaitQueue for matching identifier
+			if found, decrement waitcount
+				//override "skip" (true overrides false) for any child steps
+					//for any skipped steps, decrement waitcount of child		
+				if waitcount == 0, insert step into active queue
+			if not found, insert into WaitQueue
+
+
+////Startup
+rebuild all known workflow templates
+
+will need to rebuild orders
+	delete steps from step_status where instanceid=an instance in the instances table where status='pending'
+		--this cleans up any orders that only partially got inserted, poller will re-insert them
+	load database steps	
+		select all steps for orders that are active
+		rebuild orders one at a time
+			if no active steps, send error report for this order
+			rebuild entire heirarchy, sending active steps as copies at the correct location (by step) to the step queue
+				--possibly build the same was as it is initially built
+after orders are all rebuilt, delete unused templates from daemon to free memory
+////step completion
+	we -should- delete complete steps, but leave them here for now
+////order building
+	select all steps for this workflow template from the DB (daemon cache of db)
+		if not loaded, load it from the DB and mark it LocalStatus = active (keeps it from being deleted from cache)
+	copy the workflow from the template
+	detect unreachable steps
+		(any step without a parent other than the first)
+			--these cases dont count for exception steps!!
+		(any step where the all the parents are "complete" and the current step is "incomplete")
+		(any step where the waitcount does not reflect the status of the parents accurately)
+	run rollback on any steps marked "active"
+	start at the first step for this instance
+		following the links in the template filling in status data
+			-reset starttime to 0 on incompletes and actives
+
+
+////step queue implemented as a queue for each step_type
+	step queue loads node details from database
+
+	worker requests work
+	queue looks up workers name, and checks its "handles" by step_type
+		queue finds first queue that fits "handles"
+		gets next step
+		sends step to worker
+
+
+//build workflow monitoring / admin tool
+	--show active orders, # steps remaining, steps active, steps stuck
+	--allow admin to set a step to active manually
+		--check to make sure proper conditions exist, such as complete parents
+	--start/stop workflow
+	--get number of steps per minute/second, etc
+	--need a way to stop a moving order, and also select a step to run its rollback()
+		--controller marks DB for instance to "suspend"
+		--controller sends message to step-queue
+			step-queue marks active steps to "suspend"
+			instance added to "suspend" list
+				--any further replies from workers will result in new steps being marked as suspend, and put in suspend list
+
+//handle sub-flows and exception/exception flows
+////subflows
+	current step status set to "subflow"
+	subflow built and inserted like normal flow
+		should be marked in the workflow template db as a subflow
+		active instances table should have "parent" fields, that we can use to mark the correct step complete when subflow ends
+			--also mark them as a subflow
+			--also mark them as a exception flow
+	on completion of subflow, parent step is marked "complete" and continues
+	this way, subflows can be built correctly when rebuilding orders
+		--possibly even let steps _be_ subflows statically as well as dynamic
+
+////exception
+exception subflows will simply "just work" with the above subflow implementation
+exception steps will need some special logic, as they can be called multiple times and do not initiate an entire seperate flow

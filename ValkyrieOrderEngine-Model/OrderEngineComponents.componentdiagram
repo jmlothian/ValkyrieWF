@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" dslVersion="1.0.0.0" Id="d270682d-7b13-404c-a71a-74fb61e13b73" name="OrderEngineComponents" linkedPackageId="407a4751-0c60-48f1-92b8-527a70ba4274" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
+  <ownedCommentsInternal>
+    <comment Id="78b6d502-5621-4061-a60b-a2b92fc363bf">
+      <elementDefinition Id="695cd1f1-ec0b-4197-862c-aa6dc32d64d6" />
+      <body>This is any one of several processor nodes that can be coded and configured differently</body>
+      <annotatedElements>
+        <componentMoniker Id="e920d441-5358-4c18-b02a-2187fb148a80" LastKnownName="ValkyrieProcessor" />
+      </annotatedElements>
+    </comment>
+    <comment Id="8d4fc66b-6d1a-482f-9659-bb6885956fd4">
+      <elementDefinition Id="acecc5a3-b426-4bfa-a3cd-9ee51e0aa0be" />
+      <body>ValkyrieProcessor setup specifically to call and handle LinuxURL scripts</body>
+      <annotatedElements>
+        <componentMoniker Id="6dc5e3de-ee52-40d3-8cf5-76bce2f38618" LastKnownName="LinuxURLCaller" />
+      </annotatedElements>
+    </comment>
+    <comment Id="64d3cf6d-341c-471c-8ac7-21feadda2e07">
+      <elementDefinition Id="c8824d06-3770-4920-9d89-7ef74626b0f9" />
+      <body>Message Queue containing commands for processor nodes.
+
+These are used to start/pause/stop processor nodes from a central location.</body>
+      <annotatedElements>
+        <componentMoniker Id="d4024606-bc5c-471b-9688-525345107720" LastKnownName="ControlMessageQueue" />
+      </annotatedElements>
+    </comment>
+    <comment Id="c9dcc42a-d66b-44d9-ac81-3778d77e20f1">
+      <elementDefinition Id="c5adaf37-9cbf-437f-996a-cc0cfa738249" />
+      <body>Contains messages specific to the linux url caller</body>
+      <annotatedElements>
+        <componentMoniker Id="3ebb01a0-e1b0-45c9-aa4c-08e17fa644ae" LastKnownName="LinuxScript Message Queue" />
+      </annotatedElements>
+    </comment>
+    <comment Id="504b2da7-fde6-4e48-9899-67586e9c8016">
+      <elementDefinition Id="e205b9d2-b0d1-470a-82bc-fd63bad9c838" />
+      <body>Temporary ValkyrieProcessor to aid transition of old style scripts to new system</body>
+      <annotatedElements>
+        <componentMoniker Id="82eef9d0-e2bc-4f7a-bc1a-5e8c01499c3f" LastKnownName="OEEngine-ScriptRunner" />
+      </annotatedElements>
+    </comment>
+    <comment Id="7973bf79-347b-4abc-a416-f9d66ae2d454">
+      <elementDefinition Id="2f4933e6-460c-4cd6-8c04-9b6a45f3ee97" />
+      <body>Exec or web service that allows scripts to send messages to message queues</body>
+      <annotatedElements>
+        <componentMoniker Id="3f54065f-bece-4555-8670-2c111ddd0513" LastKnownName="Script2Message Interface Exec" />
+      </annotatedElements>
+    </comment>
+    <comment Id="c4783d1a-8092-49b7-815b-fd58beea8856">
+      <elementDefinition Id="6b65600f-2513-4856-8f6d-b6b2a12918dc" />
+      <body>Message Queue specific to handling old-style script calls</body>
+      <annotatedElements>
+        <componentMoniker Id="79514397-c0b2-4b7d-a86c-ac3adab4b0e4" LastKnownName="ScriptCaller Message Queue" />
+      </annotatedElements>
+    </comment>
+    <comment Id="68cc0864-6ea8-43bb-9dfd-6732b23b7029">
+      <elementDefinition Id="bc54b5f2-d03e-4618-8c60-ae3db7a57e77" />
+      <body>Queue that keeps track of what new steps need processing.  
+
+In reality, there would be multiple queues, each with a specialized set of scripts/processors associated with it.  This allows shorter scripts executions to be seperated from longer ones to assist load balancing.</body>
+      <annotatedElements>
+        <componentMoniker Id="881cb3ce-a2e2-4b17-ba93-c93f4d9ba08c" LastKnownName="Valkyrie ToProcess Message Queue" />
+      </annotatedElements>
+    </comment>
+    <comment Id="50ab04d2-e1d0-4a0a-afaa-869cabfa2356">
+      <elementDefinition Id="ddb7edeb-f98e-4a42-bb2c-e4d2b4c57c66" />
+      <body>Note for future:
+We could send the servername / database withing the message system, so that we could actually have multiple OE databases distributed to handle a much larger scale of processing</body>
+      <annotatedElements>
+        <componentMoniker Id="685b4d2f-c711-4bf4-b291-4e011430a520" LastKnownName="OEDatabase" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <packagedElements>
+    <componentModelHasComponents>
+      <component Id="e920d441-5358-4c18-b02a-2187fb148a80" name="ValkyrieProcessor" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a02930a2-2ad7-4831-903c-51f677339c33" />
+        <ownedAttributesInternal>
+          <requiredInterface Id="72f408d8-2cc6-412d-8234-196b521e943e" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="626a502d-1065-4acc-9170-fc67c02cd32f" />
+            <suppliersInternal>
+              <dependency Id="895c00d9-ce37-43f0-be95-f72f84232b30">
+                <providedInterfaceMoniker Id="a72e1db5-a659-4666-bbeb-458343813e43" LastKnownName="Port1" />
+                <elementDefinition Id="bfb3a0ba-db9d-4f51-8b22-9e168eaefcc8" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="4711e889-b64c-4c5b-b116-d350918a88e0" LastKnownName="Reads From" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="480f5967-0951-4c3f-a0dd-67153da6f729" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="0a94b8be-e5a7-458d-981d-31e18f96233b" />
+            <suppliersInternal>
+              <dependency Id="a0d0fba2-0fb7-4cbd-95a4-6bad899f43ab">
+                <providedInterfaceMoniker Id="8feda075-578f-440e-96ac-83112e58044a" LastKnownName="Port1" />
+                <elementDefinition Id="0b84a799-f0b7-48b1-a84a-21528ab87e78" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="3eab58ab-2803-4267-a37f-d10a96dd3e48" LastKnownName="Read/Write" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="6dc5e3de-ee52-40d3-8cf5-76bce2f38618" name="LinuxURLCaller" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="f1229aaa-5551-4d66-9dba-1c6a663e218f" />
+        <generalsInternal>
+          <generalization Id="d2287288-239f-41b7-b3be-019ad9126224" isSubstitutable="false">
+            <componentMoniker Id="e920d441-5358-4c18-b02a-2187fb148a80" LastKnownName="ValkyrieProcessor" />
+            <elementDefinition Id="deb5541c-3ec4-42a7-8eab-77f0bd5e1d9a" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <requiredInterface Id="fb236c3e-8b4f-4348-801f-b4bac9b15115" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="0845df94-e47b-4a76-b78d-c87853fd4c1e" />
+            <suppliersInternal>
+              <dependency Id="0466adc3-e53f-4e06-ab25-c44622fbed13">
+                <providedInterfaceMoniker Id="5a003e76-ee98-43df-be41-d6895812fb9e" LastKnownName="Port1" />
+                <elementDefinition Id="c770f96e-c6b2-4184-84d8-5801a923b67f" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="f08951e6-885f-45e4-ab00-a9709acd8f5f" LastKnownName="ReadsFrom" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="d4024606-bc5c-471b-9688-525345107720" name="ControlMessageQueue" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="9e5fe311-620e-4cd7-a6d9-4e83e402772a" />
+        <ownedAttributesInternal>
+          <providedInterface Id="a72e1db5-a659-4666-bbeb-458343813e43" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="2f1d7a64-c6b8-4b47-820d-61a60a050815" />
+            <type_NamedElement>
+              <interfaceMoniker Id="69d8ca39-c0c2-4ba8-bf10-dd06bd7f5f0a" LastKnownName="MessageQueue" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="f7e47875-0c20-44bb-809b-10a1677512e7" name="ValkyrieController" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="6cc60a68-dff9-4e24-9197-2fc18b38141a" />
+        <ownedAttributesInternal>
+          <requiredInterface Id="f66e39d1-452d-46ed-85c1-4040df2160d7" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="950b5ec6-c86e-44f4-8a70-939388fc01dd" />
+            <suppliersInternal>
+              <dependency Id="15317157-374a-49a9-b27f-f85c74c29058">
+                <providedInterfaceMoniker Id="a72e1db5-a659-4666-bbeb-458343813e43" LastKnownName="Port1" />
+                <elementDefinition Id="7b23d16b-d60d-4320-846e-51ce6174c6c9" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="98f2cb3f-b5e3-4003-8be9-782c6ea89230" LastKnownName="Writes To" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="de17b3ca-cb6e-4ff6-bed0-34be77267da5" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="af0bcf24-68de-476b-8289-4c795adbf6e7" />
+            <suppliersInternal>
+              <dependency Id="01854b81-e557-4e46-910d-65bf1ac92f42">
+                <providedInterfaceMoniker Id="8feda075-578f-440e-96ac-83112e58044a" LastKnownName="Port1" />
+                <elementDefinition Id="1f5d127a-5b56-47ec-9dbe-5f56f5f9e499" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="97a5eccc-03b2-4bcb-9d09-6f801e6ba326" LastKnownName="Read/Write" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="69d8ca39-c0c2-4ba8-bf10-dd06bd7f5f0a" name="MessageQueue" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="29749048-3a91-415d-b8e3-1cd572832a7c" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="98f2cb3f-b5e3-4003-8be9-782c6ea89230" name="Writes To" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b89b6606-a32f-48b7-b084-4997f751d47e" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="4711e889-b64c-4c5b-b116-d350918a88e0" name="Reads From" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="99934a2e-0b73-4dc5-b72b-e3808bebb67e" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="3ebb01a0-e1b0-45c9-aa4c-08e17fa644ae" name="LinuxScript Message Queue" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="eb1579ae-2c38-4bf0-9d12-416ae060bffa" />
+        <ownedAttributesInternal>
+          <providedInterface Id="5a003e76-ee98-43df-be41-d6895812fb9e" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="97608b37-c53c-45a1-9b04-51d4b07ed35b" />
+            <type_NamedElement>
+              <interfaceMoniker Id="7f8c225a-09a6-479a-85ff-bca76702ec1e" LastKnownName="MessageQueue" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="7f8c225a-09a6-479a-85ff-bca76702ec1e" name="MessageQueue" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9a053ab6-4f55-4ac6-9e1d-7145123366e4" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="f08951e6-885f-45e4-ab00-a9709acd8f5f" name="ReadsFrom" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f6591c7d-f3e4-4e6b-956c-1041679462c1" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="82eef9d0-e2bc-4f7a-bc1a-5e8c01499c3f" name="OEEngine-ScriptRunner" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="bac7a3d8-e137-4d53-ab5c-76e21a066f9e" />
+        <generalsInternal>
+          <generalization Id="998f77d8-2e55-4096-a6ed-90a891570bcc" isSubstitutable="false">
+            <componentMoniker Id="e920d441-5358-4c18-b02a-2187fb148a80" LastKnownName="ValkyrieProcessor" />
+            <elementDefinition Id="55e89315-01bc-451b-be11-e01239ae39ab" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <requiredInterface Id="d3ede79e-e04f-4dfc-a103-5d274612bf78" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="06686abb-7798-43a3-b077-4bc25ee3b06d" />
+            <suppliersInternal>
+              <dependency Id="dde8b317-10da-434c-8f16-e5e65ef52cac">
+                <providedInterfaceMoniker Id="64d37349-d23b-48c7-b37a-56932950f832" LastKnownName="Port1" />
+                <elementDefinition Id="95daa0b0-f9c9-45b2-a016-a3367cd0df44" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="e58caaf9-b557-43b5-b714-7e11ae075f4a" LastKnownName="Reads" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="57cd3384-3025-46ba-95fc-45d32ed1a9f1" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="17889072-f902-4ad8-b538-22ad2687a1b0" />
+            <suppliersInternal>
+              <dependency Id="4dc38a01-bc5c-4b16-bad3-4776abf135b9">
+                <providedInterfaceMoniker Id="bc8796a1-08c3-48d8-9354-aac6a6e3bdc5" LastKnownName="Port1" />
+                <elementDefinition Id="d5d8fb89-bebe-4685-8e00-127dd8f61325" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="bd1b82b4-39a2-49f3-87b9-9a08fc705a9e" LastKnownName="Call Script" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="9ece12d9-025a-4aaf-8ff1-af2cabb6f1b4" name="Old-Style Scripts" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b94175cd-0be2-48ae-b3e4-8053b337cabb" />
+        <ownedAttributesInternal>
+          <providedInterface Id="bc8796a1-08c3-48d8-9354-aac6a6e3bdc5" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="a38e7563-b978-427a-a637-c0ca5fd13a2f" />
+            <type_NamedElement>
+              <interfaceMoniker Id="d14bc3fb-4c72-4379-a9bc-3a61b4031d9f" LastKnownName="Exec" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface Id="df9ee776-9b9e-414f-8dac-fc7d040658fc" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="820f0db6-d48c-49fe-a813-2c0ac7500ad2" />
+            <suppliersInternal>
+              <dependency Id="27ca7a22-2b7e-4803-a16f-4f7487d47559">
+                <providedInterfaceMoniker Id="f886ac48-6c82-4102-8bd6-5078648c4f6d" LastKnownName="Port1" />
+                <elementDefinition Id="49fb9b5f-d109-490a-8349-00f2ad2d7fdb" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="d4e31043-2ac7-4dd5-b784-c07a238d45bb" LastKnownName="Calls" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="79514397-c0b2-4b7d-a86c-ac3adab4b0e4" name="ScriptCaller Message Queue" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="3a09f770-8300-4ae1-b28c-29052e530156" />
+        <ownedAttributesInternal>
+          <providedInterface Id="64d37349-d23b-48c7-b37a-56932950f832" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="55d619ba-7be2-4951-b7a0-50f1e972f865" />
+            <type_NamedElement>
+              <interfaceMoniker Id="0e482936-2f33-4e06-86d9-4ffae9e326e7" LastKnownName="MessageQueue" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="3f54065f-bece-4555-8670-2c111ddd0513" name="Script2Message Interface Exec" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d3265a1b-d535-4ac7-80e2-905c78de64b5" />
+        <ownedAttributesInternal>
+          <providedInterface Id="f886ac48-6c82-4102-8bd6-5078648c4f6d" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="d6b59017-c721-401a-bc2c-c37976a2a51d" />
+            <type_NamedElement>
+              <interfaceMoniker Id="61457a72-83b2-4eb0-a813-2616c80fb035" LastKnownName="Exec" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface Id="a7229859-d67b-4dfe-814f-01dbe6dce875" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="246aa9ef-75f2-44fc-90f7-dc34a632b463" />
+            <suppliersInternal>
+              <dependency Id="aab00f0d-7915-48c1-a14e-309d5d05167a">
+                <providedInterfaceMoniker Id="64d37349-d23b-48c7-b37a-56932950f832" LastKnownName="Port1" />
+                <elementDefinition Id="6024f2ee-46ce-421e-bd3a-c70965c4c3dd" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="4ba09698-073b-43c6-b38a-5bab6456a118" LastKnownName="Writes" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="0e482936-2f33-4e06-86d9-4ffae9e326e7" name="MessageQueue" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="56feab72-40b6-4b40-9120-908d147b9196" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="e58caaf9-b557-43b5-b714-7e11ae075f4a" name="Reads" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="33c1a748-bd71-4db5-b31c-33127b5c3283" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="d14bc3fb-4c72-4379-a9bc-3a61b4031d9f" name="Exec" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b7e8c712-3001-4d86-aed7-5dfd48b8e066" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="bd1b82b4-39a2-49f3-87b9-9a08fc705a9e" name="Call Script" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="624b1ed0-d0ea-4617-bc5e-60a577802824" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="61457a72-83b2-4eb0-a813-2616c80fb035" name="Exec" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b329e042-ef4d-447a-87e6-7299f3ae5993" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="d4e31043-2ac7-4dd5-b784-c07a238d45bb" name="Calls" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f015540a-269b-4b39-8eac-40fa0b6edfaa" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="4ba09698-073b-43c6-b38a-5bab6456a118" name="Writes" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6bbc8cc7-8449-41df-b039-a929ac31ae60" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="685b4d2f-c711-4bf4-b291-4e011430a520" name="OEDatabase" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="29c5381f-5efb-44dd-9c5d-e6b7c0a898a3" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="a38f9d06-b3a0-4b92-861c-a92293e78fbd" name="ValkyrieStepControlQueue" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="9fac6f28-2b78-47d7-8bdb-fa0a7fc60eec" />
+        <ownedAttributesInternal>
+          <providedInterface Id="8feda075-578f-440e-96ac-83112e58044a" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="3434f4da-d6dc-491b-b803-ea0619ab7c89" />
+            <type_NamedElement>
+              <interfaceMoniker Id="eeb86456-be6b-49f1-984d-9fd7f4954ee1" LastKnownName="MessageQueue" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="eeb86456-be6b-49f1-984d-9fd7f4954ee1" name="MessageQueue" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9aabe70b-464f-49ab-b0b3-055ad4b182a7" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="97a5eccc-03b2-4bcb-9d09-6f801e6ba326" name="Read/Write" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0b0a13b9-cea0-4d88-bba6-9429e280521b" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="3eab58ab-2803-4267-a37f-d10a96dd3e48" name="Read/Write" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7b400a07-0b29-411f-9fb1-04e63ba097a0" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="881cb3ce-a2e2-4b17-ba93-c93f4d9ba08c" name="Valkyrie ToProcess Message Queue" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="af7cd85c-0ed5-4abf-9153-f56a4d1ec917" />
+        <ownedAttributesInternal>
+          <providedInterface Id="78d0e09e-c652-4d4f-9d40-885d988a9239" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="72d7fa0c-7c76-4773-b38e-32c6dfd69983" />
+            <type_NamedElement>
+              <interfaceMoniker Id="75f387eb-e625-411b-8672-ba492abac413" LastKnownName="Message Queue" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="75f387eb-e625-411b-8672-ba492abac413" name="Message Queue" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e7184640-545c-4692-9793-f21e67beaad6" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="b880dc9b-b127-4313-9564-30795396d368" name="NewStyle ScriptRunner" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4df296b1-455a-4996-b557-e48c1601df49" />
+        <generalsInternal>
+          <generalization Id="395dd799-17e5-4388-af5d-dfd88b457d61" isSubstitutable="false">
+            <componentMoniker Id="e920d441-5358-4c18-b02a-2187fb148a80" LastKnownName="ValkyrieProcessor" />
+            <elementDefinition Id="b3385cc8-7065-4607-a96e-e02568c0330f" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <requiredInterface Id="0616c6f3-edb7-45f7-a5c5-4bfedd540dad" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="f397d33c-765e-472a-94a4-4a4bdbaa0a68" />
+            <suppliersInternal>
+              <dependency Id="945c4aee-aa83-4a66-bf97-aacb439aae96">
+                <providedInterfaceMoniker Id="78d0e09e-c652-4d4f-9d40-885d988a9239" LastKnownName="Port1" />
+                <elementDefinition Id="3062df17-6022-46cb-b8fb-71d32250aae7" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="e17c3292-d5ae-4287-adde-9381fb8f9cc7" LastKnownName="Reads" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="e17c3292-d5ae-4287-adde-9381fb8f9cc7" name="Reads" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7e36bbe2-9491-4d71-9950-b08ee20d23b1" />
+      </Interface>
+    </modelContainsNamedElements>
+  </packagedElements>
+  <package Id="407a4751-0c60-48f1-92b8-527a70ba4274" name="ValkyrieOrderEngine-Model">
+    <elementDefinition Id="74a45393-7ebc-4f25-becd-2c312735235f" />
+    <profileInstances>
+      <packageHasProfileInstances Id="0869cafe-bfc9-46ed-a067-1f4022ff9a6e">
+        <profileInstance Id="05822640-c282-4bb2-ac47-0a9f01ac839c" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="77c1d67f-8f85-4d6c-b04f-e3c2987bfa6b">
+        <profileInstance Id="b15395ae-d2a9-4659-b9cf-eb1c3dcef670" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</componentModel>
